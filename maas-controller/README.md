@@ -103,12 +103,14 @@ Common groups: `dedicated-admins`, `system:authenticated`, `system:authenticated
 
 ## Install
 
+All commands below are meant to be run from the **repository root** (the directory containing `maas-controller/`).
+
 ### Option A: Full deploy with subscription controller (recommended)
 
 Deploy the entire MaaS stack including the subscription controller in one command:
 
 ```bash
-./scripts/deploy-rhoai-stable.sh -t odh --enable-subscriptions
+./scripts/deploy.sh -t odh --enable-subscriptions
 ```
 
 This installs all infrastructure (cert-manager, LWS, Kuadrant, ODH, gateway, policies)
@@ -123,6 +125,8 @@ If MaaS infrastructure is already deployed, install just the controller:
    ```bash
    NAMESPACE=opendatahub ./maas-controller/hack/disable-gateway-auth-policy.sh
    ```
+
+   The policy may be in `opendatahub` or `openshift-ingress` depending on deployment.
 
 2. Install the controller (CRDs + RBAC + deployment + default deny policy):
 
@@ -154,18 +158,25 @@ kubectl get crd | grep maas.opendatahub.io
 
 ## Examples
 
-Install the simulator model and example MaaS CRs:
+Install both **regular** and **premium** simulator models and their MaaS policies/subscriptions (from the repository root):
 
 ```bash
-cd maas-controller
-./scripts/install-examples.sh
+maas-controller/scripts/install-examples.sh
 ```
 
 This creates:
+
+**Regular tier**
 - `LLMInferenceService/facebook-opt-125m-simulated` in `llm` namespace
 - `MaaSModel/facebook-opt-125m-simulated` in `opendatahub`
-- `MaaSAuthPolicy/simulator-access` in `opendatahub` (group: `free-user` -- replace with your group)
-- `MaaSSubscription/simulator-subscription` in `opendatahub` (100 tokens/min)
+- `MaaSAuthPolicy/simulator-access` (group: `free-user`) and `MaaSSubscription/simulator-subscription` (100 tokens/min)
+
+**Premium tier**
+- `LLMInferenceService/premium-simulated-simulated-premium` in `llm` namespace
+- `MaaSModel/premium-simulated-simulated-premium` in `opendatahub`
+- `MaaSAuthPolicy/premium-simulator-access` (group: `premium-user`) and `MaaSSubscription/premium-simulator-subscription` (1000 tokens/min)
+
+Replace `free-user` and `premium-user` in the example CRs with groups from your identity provider.
 
 Then verify:
 
@@ -176,16 +187,21 @@ kubectl get maasmodel,maasauthpolicy,maassubscription -n opendatahub
 # Check generated Kuadrant policies
 kubectl get authpolicy,tokenratelimitpolicy -n llm
 
-# Test inference
+# Test inference (set GATEWAY_HOST and TOKEN once)
 GATEWAY_HOST="maas.$(kubectl get ingresses.config.openshift.io cluster -o jsonpath='{.spec.domain}')"
 TOKEN=$(oc whoami -t)
 
-# Should get 401 (no auth)
+# Regular model: 401 without auth, 200 with auth (user must be in free-user)
 curl -sSk -o /dev/null -w "%{http_code}\n" "https://${GATEWAY_HOST}/llm/facebook-opt-125m-simulated/v1/chat/completions" \
   -H "Content-Type: application/json" -d '{"model":"facebook/opt-125m","messages":[{"role":"user","content":"Hi"}],"max_tokens":5}'
-
-# Should get 200 (with auth)
 curl -sSk -o /dev/null -w "%{http_code}\n" "https://${GATEWAY_HOST}/llm/facebook-opt-125m-simulated/v1/chat/completions" \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" -d '{"model":"facebook/opt-125m","messages":[{"role":"user","content":"Hi"}],"max_tokens":5}'
+
+# Premium model: 401 without auth, 200 with auth (user must be in premium-user)
+curl -sSk -o /dev/null -w "%{http_code}\n" "https://${GATEWAY_HOST}/llm/premium-simulated-simulated-premium/v1/chat/completions" \
+  -H "Content-Type: application/json" -d '{"model":"facebook/opt-125m","messages":[{"role":"user","content":"Hi"}],"max_tokens":5}'
+curl -sSk -o /dev/null -w "%{http_code}\n" "https://${GATEWAY_HOST}/llm/premium-simulated-simulated-premium/v1/chat/completions" \
   -H "Authorization: Bearer $TOKEN" \
   -H "Content-Type: application/json" -d '{"model":"facebook/opt-125m","messages":[{"role":"user","content":"Hi"}],"max_tokens":5}'
 ```
@@ -211,22 +227,24 @@ kubectl annotate authpolicy <name> -n <namespace> maas.opendatahub.io/managed-
 The default deployment uses `quay.io/maas/maas-controller:latest` (temporary).
 
 ```bash
-make image-build                    # build with podman/buildah/docker
-make image-push                     # push to quay.io/maas/maas-controller:latest
+make -C maas-controller image-build                    # build with podman/buildah/docker
+make -C maas-controller image-push                     # push to quay.io/maas/maas-controller:latest
 
 # Custom image/tag
-make image-build IMAGE=quay.io/myorg/maas-controller IMAGE_TAG=v0.1.0
-make image-push IMAGE=quay.io/myorg/maas-controller IMAGE_TAG=v0.1.0
+make -C maas-controller image-build IMAGE=quay.io/myorg/maas-controller IMAGE_TAG=v0.1.0
+make -C maas-controller image-push IMAGE=quay.io/myorg/maas-controller IMAGE_TAG=v0.1.0
 ```
 
 ## Development
 
+From the repository root:
+
 ```bash
-make build      # build binary to bin/manager
-make run        # run locally (uses kubeconfig)
-make test       # run tests
-make install    # apply config/default to cluster
-make uninstall  # remove everything
+make -C maas-controller build      # build binary to maas-controller/bin/manager
+make -C maas-controller run        # run locally (uses kubeconfig)
+make -C maas-controller test       # run tests
+make -C maas-controller install    # apply config/default to cluster
+make -C maas-controller uninstall # remove everything
 ```
 
 ## Troubleshooting
@@ -241,13 +259,13 @@ kubectl logs deployment/maas-controller -n opendatahub --tail=20
 The groups in MaaSAuthPolicy must match your identity provider's groups, not OpenShift Group objects. Check your actual token groups (see Authentication section above).
 
 **Unauthenticated requests return 200 instead of 401:**
-The gateway-auth-policy may still be active. Run `./hack/disable-gateway-auth-policy.sh` (check both `opendatahub` and `openshift-ingress` namespaces).
+The gateway-auth-policy may still be active. From the repository root run `NAMESPACE=opendatahub maas-controller/hack/disable-gateway-auth-policy.sh` (check both `opendatahub` and `openshift-ingress` namespaces).
 
 **Kuadrant policies show `Enforced: False`:**
 Check that the WasmPlugin exists: `kubectl get wasmplugins -n openshift-ingress`. If missing, ensure RHCL (not community Kuadrant) is installed from the `redhat-operators` catalog.
 
 ## Configuration
 
-- **Controller namespace**: Default is `opendatahub`. Override by passing a namespace to `install-maas-controller.sh`.
+- **Controller namespace**: Default is `opendatahub`. Override by passing a namespace to `maas-controller/scripts/install-maas-controller.sh`.
 - **Image**: Default is `quay.io/maas/maas-controller:latest`. Override in the deployment or via Kustomize.
 - **Gateway name**: The default deny policy targets `maas-default-gateway` in `openshift-ingress`. Edit `config/policies/gateway-default-deny.yaml` if your gateway has a different name.
