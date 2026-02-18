@@ -58,7 +58,6 @@ export MAAS_REF="main"  # Use the latest release tag, or "main" for development
     The release workflow automatically updates all `MAAS_REF="main"` references in documentation and scripts
     to use the new release tag when a release is created. Use `"main"` only for development/testing.
 
-
 ### Verify Deployment
 
 The deployment script creates the following core resources:
@@ -125,6 +124,13 @@ For detailed validation and troubleshooting, see the [Validation Guide](install/
     At least one model must be deployed to validate the installation using the [Validation Guide](install/validation.md).
 
 ### Deploy Sample Models
+
+These sample models deploys to the `llm` namespace, and should be created if it doesn't already exist.
+
+```bash
+# Create namespace where models will be deployed to
+kubectl create namespace llm
+```
 
 #### Simulator Model (CPU)
 
