@@ -7,7 +7,7 @@ This guide provides instructions for validating and testing your MaaS Platform d
 | Component | RHOAI | ODH |
 |-----------|-------|-----|
 | MaaS API | redhat-ods-applications | opendatahub |
-| Kuadrant/RHCL | kuadrant-system | kuadrant-system |
+| Kuadrant/RHCL | rh-connectivity-link | kuadrant-system |
 | Gateway | openshift-ingress | openshift-ingress |
 
 ## Manual Validation (Recommended)
@@ -99,7 +99,14 @@ done
 Check that all components are running:
 
 ```bash
-kubectl get pods -n maas-api && \
+# For RHOAI:
+kubectl get pods -n redhat-ods-applications && \
+kubectl get pods -n rh-connectivity-link && \
+kubectl get pods -n kserve && \
+kubectl get pods -n llm
+
+# For ODH:
+kubectl get pods -n opendatahub && \
 kubectl get pods -n kuadrant-system && \
 kubectl get pods -n kserve && \
 kubectl get pods -n llm
