@@ -19,6 +19,7 @@ package maas
 import (
 	"context"
 	"fmt"
+	"sort"
 	"strings"
 
 	"github.com/go-logr/logr"
@@ -95,7 +96,10 @@ func (r *MaaSModelReconciler) Reconcile(ctx context.Context, req ctrl.Request) (
 		return ctrl.Result{}, err
 	}
 
-	// Auth for model routes is managed by MaaSAuthPolicy only (one AuthPolicy per route).
+	// Update gateway default policies with path prefixes derived from all model HTTPRoutes.
+	if err := r.reconcileGatewayDefaults(ctx, log); err != nil {
+		log.Error(err, "failed to reconcile gateway default policies")
+	}
 
 	// Update status based on referenced model
 	modelStatusFailed := false
@@ -461,7 +465,11 @@ func (r *MaaSModelReconciler) handleDeletion(ctx context.Context, log logr.Logge
 			}
 		}
 
-		// Remove finalizer so the MaaSModel can be deleted
+		// Update gateway defaults (path prefixes may have changed after this model's removal)
+		if err := r.reconcileGatewayDefaults(ctx, log); err != nil {
+			log.Error(err, "failed to update gateway defaults after model deletion")
+		}
+
 		controllerutil.RemoveFinalizer(model, maasModelFinalizer)
 		if err := r.Update(ctx, model); err != nil {
 			return ctrl.Result{}, err
@@ -497,6 +505,100 @@ func (r *MaaSModelReconciler) deleteGeneratedPoliciesByLabel(ctx context.Context
 		if err := r.Delete(ctx, p); err != nil && !apierrors.IsNotFound(err) {
 			return fmt.Errorf("failed to delete %s %s/%s: %w", kind, p.GetNamespace(), p.GetName(), err)
 		}
+	}
+
+	return nil
+}
+
+// reconcileGatewayDefaults updates the gateway-default-auth (AuthPolicy) and
+// gateway-default-deny (TRLP) with a `when` predicate derived from the actual
+// HTTPRoute path prefixes of all MaaSModels. This avoids hardcoding a namespace
+// like "/llm/" -- the predicate adapts to whichever namespaces models live in.
+func (r *MaaSModelReconciler) reconcileGatewayDefaults(ctx context.Context, log logr.Logger) error {
+	var models maasv1alpha1.MaaSModelList
+	if err := r.List(ctx, &models); err != nil {
+		return fmt.Errorf("failed to list MaaSModels: %w", err)
+	}
+
+	nsSet := map[string]bool{}
+	for _, m := range models.Items {
+		if !m.GetDeletionTimestamp().IsZero() {
+			continue
+		}
+		ns := m.Spec.ModelRef.Namespace
+		if ns == "" {
+			ns = m.Namespace
+		}
+		nsSet[ns] = true
+	}
+
+	var pathPredicates []string
+	for ns := range nsSet {
+		pathPredicates = append(pathPredicates, fmt.Sprintf(`request.path.startsWith("/%s/")`, ns))
+	}
+
+	var whenPredicate string
+	if len(pathPredicates) > 0 {
+		sort.Strings(pathPredicates)
+		whenPredicate = strings.Join(pathPredicates, " || ")
+	}
+
+	const gatewayNS = "openshift-ingress"
+
+	authPolicy := &unstructured.Unstructured{}
+	authPolicy.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1", Kind: "AuthPolicy"})
+	key := client.ObjectKey{Name: "gateway-default-auth", Namespace: gatewayNS}
+	if err := r.Get(ctx, key, authPolicy); err != nil {
+		if !apierrors.IsNotFound(err) {
+			return fmt.Errorf("failed to get gateway-default-auth: %w", err)
+		}
+	} else {
+		defaults, _, _ := unstructured.NestedMap(authPolicy.Object, "spec", "defaults")
+		if defaults == nil {
+			defaults = map[string]interface{}{}
+		}
+		if whenPredicate != "" {
+			defaults["when"] = []interface{}{
+				map[string]interface{}{"predicate": whenPredicate},
+			}
+		} else {
+			delete(defaults, "when")
+		}
+		if err := unstructured.SetNestedMap(authPolicy.Object, defaults, "spec", "defaults"); err != nil {
+			return fmt.Errorf("failed to set defaults on gateway-default-auth: %w", err)
+		}
+		if err := r.Update(ctx, authPolicy); err != nil {
+			return fmt.Errorf("failed to update gateway-default-auth: %w", err)
+		}
+		log.Info("Updated gateway-default-auth path predicate", "predicate", whenPredicate)
+	}
+
+	trlp := &unstructured.Unstructured{}
+	trlp.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1alpha1", Kind: "TokenRateLimitPolicy"})
+	key = client.ObjectKey{Name: "gateway-default-deny", Namespace: gatewayNS}
+	if err := r.Get(ctx, key, trlp); err != nil {
+		if !apierrors.IsNotFound(err) {
+			return fmt.Errorf("failed to get gateway-default-deny: %w", err)
+		}
+	} else {
+		denyLimit, _, _ := unstructured.NestedMap(trlp.Object, "spec", "defaults", "limits", "deny-all-by-default")
+		if denyLimit == nil {
+			denyLimit = map[string]interface{}{}
+		}
+		if whenPredicate != "" {
+			denyLimit["when"] = []interface{}{
+				map[string]interface{}{"predicate": whenPredicate},
+			}
+		} else {
+			delete(denyLimit, "when")
+		}
+		if err := unstructured.SetNestedMap(trlp.Object, denyLimit, "spec", "defaults", "limits", "deny-all-by-default"); err != nil {
+			return fmt.Errorf("failed to set when on gateway-default-deny: %w", err)
+		}
+		if err := r.Update(ctx, trlp); err != nil {
+			return fmt.Errorf("failed to update gateway-default-deny: %w", err)
+		}
+		log.Info("Updated gateway-default-deny path predicate", "predicate", whenPredicate)
 	}
 
 	return nil
