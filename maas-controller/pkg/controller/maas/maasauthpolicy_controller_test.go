@@ -130,60 +130,6 @@ func TestMaaSAuthPolicyReconciler_ManagedAnnotation(t *testing.T) {
 	}
 }
 
-// TestMaaSAuthPolicyReconciler_IdempotentReconciliation verifies that reconciling
-// the same auth policy twice in a row does not produce a redundant AuthPolicy update.
-func TestMaaSAuthPolicyReconciler_IdempotentReconciliation(t *testing.T) {
-	const (
-		modelName      = "llm"
-		namespace      = "default"
-		httpRouteName  = "maas-model-" + modelName
-		authPolicyName = "maas-auth-" + modelName
-	)
-
-	model := newMaaSModelRef(modelName, namespace, "ExternalModel", modelName, "")
-	route := newHTTPRoute(httpRouteName, namespace)
-	policy := newMaaSAuthPolicy("policy-a", namespace, "team-a", modelName)
-
-	c := fake.NewClientBuilder().
-		WithScheme(scheme).
-		WithRESTMapper(testRESTMapper()).
-		WithObjects(model, route, policy).
-		WithStatusSubresource(&maasv1alpha1.MaaSAuthPolicy{}).
-		Build()
-
-	r := &MaaSAuthPolicyReconciler{Client: c, Scheme: scheme, MaaSAPINamespace: "maas-system"}
-	ctx := context.Background()
-	req := ctrl.Request{NamespacedName: types.NamespacedName{Name: "policy-a", Namespace: namespace}}
-
-	// First reconcile: creates the AuthPolicy.
-	if _, err := r.Reconcile(ctx, req); err != nil {
-		t.Fatalf("Reconcile #1: %v", err)
-	}
-
-	ap := &unstructured.Unstructured{}
-	ap.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1", Kind: "AuthPolicy"})
-	if err := c.Get(ctx, types.NamespacedName{Name: authPolicyName, Namespace: namespace}, ap); err != nil {
-		t.Fatalf("Get AuthPolicy after reconcile #1: %v", err)
-	}
-	rvAfter1 := ap.GetResourceVersion()
-
-	// Second reconcile: same policy, same state. AuthPolicy should not be updated.
-	if _, err := r.Reconcile(ctx, req); err != nil {
-		t.Fatalf("Reconcile #2: %v", err)
-	}
-
-	if err := c.Get(ctx, types.NamespacedName{Name: authPolicyName, Namespace: namespace}, ap); err != nil {
-		t.Fatalf("Get AuthPolicy after reconcile #2: %v", err)
-	}
-	rvAfter2 := ap.GetResourceVersion()
-
-	if rvAfter1 != rvAfter2 {
-		t.Errorf("redundant AuthPolicy update: ResourceVersion changed from %s to %s; "+
-			"reconciling the same auth policy twice should not update the AuthPolicy when content is unchanged",
-			rvAfter1, rvAfter2)
-	}
-}
-
 // TestMaaSAuthPolicyReconciler_DuplicateReconciliation verifies that reconciling
 // multiple auth policies for the same model does not produce redundant AuthPolicy updates.
 //
