@@ -133,6 +133,60 @@ func TestMaaSSubscriptionReconciler_ManagedAnnotation(t *testing.T) {
 	}
 }
 
+// TestMaaSSubscriptionReconciler_IdempotentReconciliation verifies that reconciling
+// the same subscription twice in a row does not produce a redundant TokenRateLimitPolicy update.
+func TestMaaSSubscriptionReconciler_IdempotentReconciliation(t *testing.T) {
+	const (
+		modelName     = "llm"
+		namespace     = "default"
+		httpRouteName = "maas-model-" + modelName
+		trlpName      = "maas-trlp-" + modelName
+	)
+
+	model := newMaaSModelRef(modelName, namespace, "ExternalModel", modelName, "")
+	route := newHTTPRoute(httpRouteName, namespace)
+	sub := newMaaSSubscription("sub-a", namespace, "team-a", modelName, 100)
+
+	c := fake.NewClientBuilder().
+		WithScheme(scheme).
+		WithRESTMapper(testRESTMapper()).
+		WithObjects(model, route, sub).
+		WithStatusSubresource(&maasv1alpha1.MaaSSubscription{}).
+		Build()
+
+	r := &MaaSSubscriptionReconciler{Client: c, Scheme: scheme}
+	ctx := context.Background()
+	req := ctrl.Request{NamespacedName: types.NamespacedName{Name: "sub-a", Namespace: namespace}}
+
+	// First reconcile: creates the TokenRateLimitPolicy.
+	if _, err := r.Reconcile(ctx, req); err != nil {
+		t.Fatalf("Reconcile #1: %v", err)
+	}
+
+	trlp := &unstructured.Unstructured{}
+	trlp.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1alpha1", Kind: "TokenRateLimitPolicy"})
+	if err := c.Get(ctx, types.NamespacedName{Name: trlpName, Namespace: namespace}, trlp); err != nil {
+		t.Fatalf("Get TokenRateLimitPolicy after reconcile #1: %v", err)
+	}
+	rvAfter1 := trlp.GetResourceVersion()
+
+	// Second reconcile: same subscription, same state. TokenRateLimitPolicy should not be updated.
+	if _, err := r.Reconcile(ctx, req); err != nil {
+		t.Fatalf("Reconcile #2: %v", err)
+	}
+
+	if err := c.Get(ctx, types.NamespacedName{Name: trlpName, Namespace: namespace}, trlp); err != nil {
+		t.Fatalf("Get TokenRateLimitPolicy after reconcile #2: %v", err)
+	}
+	rvAfter2 := trlp.GetResourceVersion()
+
+	if rvAfter1 != rvAfter2 {
+		t.Errorf("redundant TokenRateLimitPolicy update: ResourceVersion changed from %s to %s; "+
+			"reconciling the same subscription twice should not update the TokenRateLimitPolicy when content is unchanged",
+			rvAfter1, rvAfter2)
+	}
+}
+
 // TestMaaSSubscriptionReconciler_DuplicateReconciliation verifies that reconciling
 // multiple subscriptions for the same model does not produce redundant TRLP updates.
 //

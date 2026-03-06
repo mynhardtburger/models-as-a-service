@@ -165,6 +165,53 @@ func TestMaaSModelRefReconciler_gatewayNamespace(t *testing.T) {
 	})
 }
 
+// TestMaaSModelRefReconciler_IdempotentReconciliation verifies that reconciling the
+// same MaaSModelRef twice in a row does not produce a redundant status update.
+func TestMaaSModelRefReconciler_IdempotentReconciliation(t *testing.T) {
+	ctx := context.Background()
+	const (
+		modelName   = "test-model"
+		llmisvcName = "test-llmisvc"
+		ns          = "default"
+	)
+
+	route := newLLMISvcRoute(llmisvcName, ns)
+	llmisvc := newLLMISvc(llmisvcName, ns, corev1.ConditionTrue)
+	model := newMaaSModelRef(modelName, ns, "LLMInferenceService", llmisvcName, "")
+	r, c := newTestReconciler(model, route, llmisvc)
+	req := ctrl.Request{NamespacedName: types.NamespacedName{Name: modelName, Namespace: ns}}
+
+	// First reconcile: adds finalizer and sets status to Ready.
+	if _, err := r.Reconcile(ctx, req); err != nil {
+		t.Fatalf("Reconcile #1: %v", err)
+	}
+
+	got := &maasv1alpha1.MaaSModelRef{}
+	if err := c.Get(ctx, req.NamespacedName, got); err != nil {
+		t.Fatalf("Get after reconcile #1: %v", err)
+	}
+	if got.Status.Phase != "Ready" {
+		t.Fatalf("after reconcile #1: Phase = %q, want Ready", got.Status.Phase)
+	}
+	rvAfter1 := got.GetResourceVersion()
+
+	// Second reconcile: same model, same backend state. No writes should occur.
+	if _, err := r.Reconcile(ctx, req); err != nil {
+		t.Fatalf("Reconcile #2: %v", err)
+	}
+
+	if err := c.Get(ctx, req.NamespacedName, got); err != nil {
+		t.Fatalf("Get after reconcile #2: %v", err)
+	}
+	rvAfter2 := got.GetResourceVersion()
+
+	if rvAfter1 != rvAfter2 {
+		t.Errorf("redundant status update: ResourceVersion changed from %s to %s; "+
+			"reconciling the same model twice should not update status when backend state is unchanged",
+			rvAfter1, rvAfter2)
+	}
+}
+
 // TestMaaSModelReconciler_LLMISvcReadyTransition_ModelBecomesReady verifies that when
 // a backing LLMInferenceService transitions from not-ready to ready, the MaaSModelRef
 // is automatically re-reconciled and moves from Pending to Ready.
