@@ -33,9 +33,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
 	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/handler"
+	"sigs.k8s.io/controller-runtime/pkg/predicate"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 	gatewayapiv1 "sigs.k8s.io/gateway-api/apis/v1"
 )
@@ -421,7 +423,7 @@ func (r *MaaSSubscriptionReconciler) SetupWithManager(mgr ctrl.Manager) error {
 	generatedTRLP.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1alpha1", Kind: "TokenRateLimitPolicy"})
 
 	return ctrl.NewControllerManagedBy(mgr).
-		For(&maasv1alpha1.MaaSSubscription{}).
+		For(&maasv1alpha1.MaaSSubscription{}, builder.WithPredicates(predicate.GenerationChangedPredicate{})).
 		// Watch HTTPRoutes so we re-reconcile when KServe creates/updates a route
 		// (fixes race condition where MaaSSubscription is created before HTTPRoute exists).
 		Watches(&gatewayapiv1.HTTPRoute{}, handler.EnqueueRequestsFromMapFunc(
