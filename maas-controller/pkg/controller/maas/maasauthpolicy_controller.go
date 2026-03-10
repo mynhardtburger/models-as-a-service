@@ -26,8 +26,8 @@ import (
 
 	"github.com/go-logr/logr"
 	maasv1alpha1 "github.com/opendatahub-io/models-as-a-service/maas-controller/api/maas/v1alpha1"
-	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	equality "k8s.io/apimachinery/pkg/api/equality"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -558,6 +558,8 @@ func getAuthPolicyConditionState(ap *unstructured.Unstructured) (accepted, enfor
 }
 
 func (r *MaaSAuthPolicyReconciler) updateStatus(ctx context.Context, policy *maasv1alpha1.MaaSAuthPolicy, phase, message string) {
+	snapshot := policy.Status.DeepCopy()
+
 	policy.Status.Phase = phase
 
 	status := metav1.ConditionTrue
@@ -574,12 +576,8 @@ func (r *MaaSAuthPolicyReconciler) updateStatus(ctx context.Context, policy *maa
 		Message: message,
 	})
 
-	// Compare with server-side status to avoid redundant writes.
-	current := &maasv1alpha1.MaaSAuthPolicy{}
-	if err := r.Get(ctx, client.ObjectKeyFromObject(policy), current); err == nil {
-		if equality.Semantic.DeepEqual(current.Status, policy.Status) {
-			return
-		}
+	if equality.Semantic.DeepEqual(*snapshot, policy.Status) {
+		return
 	}
 
 	if err := r.Status().Update(ctx, policy); err != nil {

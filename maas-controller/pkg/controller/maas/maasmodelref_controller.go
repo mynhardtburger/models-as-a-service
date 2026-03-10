@@ -24,8 +24,8 @@ import (
 	kservev1alpha1 "github.com/kserve/kserve/pkg/apis/serving/v1alpha1"
 	maasv1alpha1 "github.com/opendatahub-io/models-as-a-service/maas-controller/api/maas/v1alpha1"
 	"knative.dev/pkg/apis"
-	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	equality "k8s.io/apimachinery/pkg/api/equality"
+	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
@@ -242,6 +242,8 @@ func (r *MaaSModelRefReconciler) updateStatus(ctx context.Context, model *maasv1
 
 // updateStatusWithReason sets Phase and Ready condition; when phase is "Failed", reason overrides the default "ReconcileFailed" (e.g. "Unsupported" for unimplemented kinds).
 func (r *MaaSModelRefReconciler) updateStatusWithReason(ctx context.Context, model *maasv1alpha1.MaaSModelRef, phase, message, reason string) {
+	snapshot := model.Status.DeepCopy()
+
 	model.Status.Phase = phase
 
 	status := metav1.ConditionTrue
@@ -264,12 +266,8 @@ func (r *MaaSModelRefReconciler) updateStatusWithReason(ctx context.Context, mod
 		Message: message,
 	})
 
-	// Compare with server-side status to avoid redundant writes.
-	current := &maasv1alpha1.MaaSModelRef{}
-	if err := r.Get(ctx, client.ObjectKeyFromObject(model), current); err == nil {
-		if equality.Semantic.DeepEqual(current.Status, model.Status) {
-			return
-		}
+	if equality.Semantic.DeepEqual(*snapshot, model.Status) {
+		return
 	}
 
 	if err := r.Status().Update(ctx, model); err != nil {
