@@ -72,7 +72,8 @@ func newHTTPRoute(name, ns string) *gatewayapiv1.HTTPRoute {
 }
 
 // newMaaSSubscription creates a MaaSSubscription with a single owner group and a single
-// model ref with the given token rate limit.
+// model ref with the given token rate limit. The model namespace defaults to the
+// subscription's namespace (ns).
 func newMaaSSubscription(name, ns, group, modelName string, limit int64) *maasv1alpha1.MaaSSubscription {
 	return &maasv1alpha1.MaaSSubscription{
 		ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: ns},
@@ -81,14 +82,14 @@ func newMaaSSubscription(name, ns, group, modelName string, limit int64) *maasv1
 				Groups: []maasv1alpha1.GroupReference{{Name: group}},
 			},
 			ModelRefs: []maasv1alpha1.ModelSubscriptionRef{
-				{Name: modelName, TokenRateLimits: []maasv1alpha1.TokenRateLimit{{Limit: limit, Window: "1m"}}},
+				{Name: modelName, Namespace: ns, TokenRateLimits: []maasv1alpha1.TokenRateLimit{{Limit: limit, Window: "1m"}}},
 			},
 		},
 	}
 }
 
 // newMaaSAuthPolicy creates a MaaSAuthPolicy with a single subject group and the given model refs.
-func newMaaSAuthPolicy(name, ns, group string, modelRefs ...string) *maasv1alpha1.MaaSAuthPolicy {
+func newMaaSAuthPolicy(name, ns, group string, modelRefs ...maasv1alpha1.ModelRef) *maasv1alpha1.MaaSAuthPolicy {
 	return &maasv1alpha1.MaaSAuthPolicy{
 		ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: ns},
 		Spec: maasv1alpha1.MaaSAuthPolicySpec{

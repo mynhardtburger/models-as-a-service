@@ -120,9 +120,10 @@ func (r *MaaSAuthPolicyReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 }
 
 type authPolicyRef struct {
-	Name      string
-	Namespace string
-	Model     string
+	Name           string
+	Namespace      string
+	Model          string
+	ModelNamespace string
 }
 
 func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Context, log logr.Logger, policy *maasv1alpha1.MaaSAuthPolicy) ([]authPolicyRef, error) {
@@ -130,23 +131,23 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 	// Model-centric approach: for each model referenced by this auth policy,
 	// find ALL auth policies for that model and build a single aggregated AuthPolicy.
 	// Kuadrant only allows one AuthPolicy per HTTPRoute target.
-	for _, modelName := range policy.Spec.ModelRefs {
-		httpRouteName, httpRouteNS, err := r.findHTTPRouteForModel(ctx, log, policy.Namespace, modelName)
+	for _, ref := range policy.Spec.ModelRefs {
+		httpRouteName, httpRouteNS, err := findHTTPRouteForModel(ctx, r.Client, ref.Namespace, ref.Name)
 		if err != nil {
 			if errors.Is(err, ErrModelNotFound) {
-				log.Info("model not found, cleaning up generated AuthPolicy", "model", modelName)
-				if delErr := r.deleteModelAuthPolicy(ctx, log, modelName); delErr != nil {
-					return nil, fmt.Errorf("failed to clean up AuthPolicy for missing model %s: %w", modelName, delErr)
+				log.Info("model not found, cleaning up generated AuthPolicy", "model", ref.Namespace+"/"+ref.Name)
+				if delErr := r.deleteModelAuthPolicy(ctx, log, ref.Namespace, ref.Name); delErr != nil {
+					return nil, fmt.Errorf("failed to clean up AuthPolicy for missing model %s/%s: %w", ref.Namespace, ref.Name, delErr)
 				}
 				continue
 			}
-			return nil, fmt.Errorf("failed to resolve HTTPRoute for model %s: %w", modelName, err)
+			return nil, fmt.Errorf("failed to resolve HTTPRoute for model %s/%s: %w", ref.Namespace, ref.Name, err)
 		}
 
 		// Find ALL auth policies for this model (not just the current one)
-		allPolicies, err := findAllAuthPoliciesForModel(ctx, r.Client, modelName)
+		allPolicies, err := findAllAuthPoliciesForModel(ctx, r.Client, ref.Namespace, ref.Name)
 		if err != nil {
-			return nil, fmt.Errorf("failed to list auth policies for model %s: %w", modelName, err)
+			return nil, fmt.Errorf("failed to list auth policies for model %s/%s: %w", ref.Namespace, ref.Name, err)
 		}
 
 		// Aggregate membership conditions from ALL auth policies
@@ -372,13 +373,13 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 		}
 
 		// Build the aggregated AuthPolicy (one per model, covering all MaaSAuthPolicies)
-		authPolicyName := fmt.Sprintf("maas-auth-%s", modelName)
+		authPolicyName := fmt.Sprintf("maas-auth-%s", ref.Name)
 		authPolicy := &unstructured.Unstructured{}
 		authPolicy.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1", Kind: "AuthPolicy"})
 		authPolicy.SetName(authPolicyName)
 		authPolicy.SetNamespace(httpRouteNS)
 		authPolicy.SetLabels(map[string]string{
-			"maas.opendatahub.io/model":    modelName,
+			"maas.opendatahub.io/model":    ref.Name,
 			"app.kubernetes.io/managed-by": "maas-controller",
 			"app.kubernetes.io/part-of":    "maas-auth-policy",
 			"app.kubernetes.io/component":  "auth-policy",
@@ -387,7 +388,7 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 			"maas.opendatahub.io/auth-policies": strings.Join(policyNames, ","),
 		})
 
-		refs = append(refs, authPolicyRef{Name: authPolicyName, Namespace: httpRouteNS, Model: modelName})
+		refs = append(refs, authPolicyRef{Name: authPolicyName, Namespace: httpRouteNS, Model: ref.Name, ModelNamespace: ref.Namespace})
 
 		spec := map[string]interface{}{
 			"targetRef": map[string]interface{}{
@@ -407,9 +408,9 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 		err = r.Get(ctx, client.ObjectKeyFromObject(authPolicy), existing)
 		if apierrors.IsNotFound(err) {
 			if err := r.Create(ctx, authPolicy); err != nil {
-				return nil, fmt.Errorf("failed to create AuthPolicy for model %s: %w", modelName, err)
+				return nil, fmt.Errorf("failed to create AuthPolicy for model %s/%s: %w", ref.Namespace, ref.Name, err)
 			}
-			log.Info("AuthPolicy created", "name", authPolicyName, "model", modelName, "policies", policyNames)
+			log.Info("AuthPolicy created", "name", authPolicyName, "model", ref.Namespace+"/"+ref.Name, "policies", policyNames)
 		} else if err != nil {
 			return nil, fmt.Errorf("failed to get existing AuthPolicy: %w", err)
 		} else {
@@ -447,12 +448,12 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 
 				modified, _ := json.Marshal(existing.Object)
 				if bytes.Equal(snapshot, modified) {
-					log.Info("AuthPolicy unchanged, skipping update", "name", authPolicyName, "model", modelName)
+					log.Info("AuthPolicy unchanged, skipping update", "name", authPolicyName, "model", ref.Namespace+"/"+ref.Name)
 				} else {
 					if err := r.Update(ctx, existing); err != nil {
-						return nil, fmt.Errorf("failed to update AuthPolicy for model %s: %w", modelName, err)
+						return nil, fmt.Errorf("failed to update AuthPolicy for model %s/%s: %w", ref.Namespace, ref.Name, err)
 					}
-					log.Info("AuthPolicy updated", "name", authPolicyName, "model", modelName, "policies", policyNames)
+					log.Info("AuthPolicy updated", "name", authPolicyName, "model", ref.Namespace+"/"+ref.Name, "policies", policyNames)
 				}
 			}
 		}
@@ -460,13 +461,13 @@ func (r *MaaSAuthPolicyReconciler) reconcileModelAuthPolicies(ctx context.Contex
 	return refs, nil
 }
 
-// findHTTPRouteForModel delegates to the shared helper in helpers.go.
-func (r *MaaSAuthPolicyReconciler) findHTTPRouteForModel(ctx context.Context, log logr.Logger, defaultNS, modelName string) (string, string, error) {
-	return findHTTPRouteForModel(ctx, r.Client, defaultNS, modelName)
-}
-
-// deleteModelAuthPolicy deletes the aggregated AuthPolicy for a model by label.
-func (r *MaaSAuthPolicyReconciler) deleteModelAuthPolicy(ctx context.Context, log logr.Logger, modelName string) error {
+// deleteModelAuthPolicy deletes the aggregated AuthPolicy for a model in the given namespace.
+func (r *MaaSAuthPolicyReconciler) deleteModelAuthPolicy(ctx context.Context, log logr.Logger, modelNamespace, modelName string) error {
+	// Check if there are any remaining (non-deleted) MaaSAuthPolicies that reference this model.
+	// If yes, don't delete the aggregated AuthPolicy - they will rebuild it.
+	// Always delete the aggregated AuthPolicy so remaining MaaSAuthPolicies rebuild it
+	// without the subjects from the deleted policy. If we skip deletion, the aggregated
+	// AuthPolicy will contain stale subjects from the deleted MaaSAuthPolicy.
 	policyList := &unstructured.UnstructuredList{}
 	policyList.SetGroupVersionKind(schema.GroupVersionKind{Group: "kuadrant.io", Version: "v1", Kind: "AuthPolicyList"})
 	labelSelector := client.MatchingLabels{
@@ -474,7 +475,7 @@ func (r *MaaSAuthPolicyReconciler) deleteModelAuthPolicy(ctx context.Context, lo
 		"app.kubernetes.io/managed-by": "maas-controller",
 		"app.kubernetes.io/part-of":    "maas-auth-policy",
 	}
-	if err := r.List(ctx, policyList, labelSelector); err != nil {
+	if err := r.List(ctx, policyList, client.InNamespace(modelNamespace), labelSelector); err != nil {
 		if apierrors.IsNotFound(err) || apimeta.IsNoMatchError(err) {
 			return nil
 		}
@@ -483,10 +484,10 @@ func (r *MaaSAuthPolicyReconciler) deleteModelAuthPolicy(ctx context.Context, lo
 	for i := range policyList.Items {
 		p := &policyList.Items[i]
 		if !isManaged(p) {
-			log.Info("AuthPolicy opted out, skipping deletion", "name", p.GetName(), "namespace", p.GetNamespace(), "model", modelName)
+			log.Info("AuthPolicy opted out, skipping deletion", "name", p.GetName(), "namespace", p.GetNamespace(), "model", modelNamespace+"/"+modelName)
 			continue
 		}
-		log.Info("Deleting AuthPolicy", "name", p.GetName(), "namespace", p.GetNamespace(), "model", modelName)
+		log.Info("Deleting AuthPolicy (no remaining parent policies)", "name", p.GetName(), "namespace", p.GetNamespace(), "model", modelNamespace+"/"+modelName)
 		if err := r.Delete(ctx, p); err != nil && !apierrors.IsNotFound(err) {
 			return fmt.Errorf("failed to delete AuthPolicy %s/%s: %w", p.GetNamespace(), p.GetName(), err)
 		}
@@ -496,10 +497,10 @@ func (r *MaaSAuthPolicyReconciler) deleteModelAuthPolicy(ctx context.Context, lo
 
 func (r *MaaSAuthPolicyReconciler) handleDeletion(ctx context.Context, log logr.Logger, policy *maasv1alpha1.MaaSAuthPolicy) (ctrl.Result, error) {
 	if controllerutil.ContainsFinalizer(policy, maasAuthPolicyFinalizer) {
-		for _, modelName := range policy.Spec.ModelRefs {
-			log.Info("Deleting model AuthPolicy so remaining policies can rebuild it", "model", modelName)
-			if err := r.deleteModelAuthPolicy(ctx, log, modelName); err != nil {
-				log.Error(err, "failed to clean up AuthPolicy, will retry", "model", modelName)
+		for _, ref := range policy.Spec.ModelRefs {
+			log.Info("Deleting model AuthPolicy so remaining policies can rebuild it", "model", ref.Namespace+"/"+ref.Name)
+			if err := r.deleteModelAuthPolicy(ctx, log, ref.Namespace, ref.Name); err != nil {
+				log.Error(err, "failed to clean up AuthPolicy, will retry", "model", ref.Namespace+"/"+ref.Name)
 				return ctrl.Result{}, err
 			}
 		}
@@ -521,13 +522,13 @@ func (r *MaaSAuthPolicyReconciler) updateAuthPolicyRefStatus(ctx context.Context
 		if err := r.Get(ctx, client.ObjectKeyFromObject(ap), ap); err != nil {
 			log.Info("could not get AuthPolicy for status", "name", ref.Name, "namespace", ref.Namespace, "error", err)
 			policy.Status.AuthPolicies = append(policy.Status.AuthPolicies, maasv1alpha1.AuthPolicyRefStatus{
-				Name: ref.Name, Namespace: ref.Namespace, Model: ref.Model, Accepted: "Unknown", Enforced: "Unknown",
+				Name: ref.Name, Namespace: ref.Namespace, Model: ref.Model, ModelNamespace: ref.ModelNamespace, Accepted: "Unknown", Enforced: "Unknown",
 			})
 			continue
 		}
 		accepted, enforced := getAuthPolicyConditionState(ap)
 		policy.Status.AuthPolicies = append(policy.Status.AuthPolicies, maasv1alpha1.AuthPolicyRefStatus{
-			Name: ref.Name, Namespace: ref.Namespace, Model: ref.Model, Accepted: accepted, Enforced: enforced,
+			Name: ref.Name, Namespace: ref.Namespace, Model: ref.Model, ModelNamespace: ref.ModelNamespace, Accepted: accepted, Enforced: enforced,
 		})
 	}
 }
@@ -613,7 +614,8 @@ func (r *MaaSAuthPolicyReconciler) mapGeneratedAuthPolicyToParent(ctx context.Co
 	if modelName == "" {
 		return nil
 	}
-	ap := findAnyAuthPolicyForModel(ctx, r.Client, modelName)
+	modelNamespace := obj.GetNamespace()
+	ap := findAnyAuthPolicyForModel(ctx, r.Client, modelNamespace, modelName)
 	if ap == nil {
 		return nil
 	}
@@ -630,13 +632,13 @@ func (r *MaaSAuthPolicyReconciler) mapMaaSModelRefToMaaSAuthPolicies(ctx context
 		return nil
 	}
 	var policies maasv1alpha1.MaaSAuthPolicyList
-	if err := r.List(ctx, &policies, client.InNamespace(model.Namespace)); err != nil {
+	if err := r.List(ctx, &policies); err != nil {
 		return nil
 	}
 	var requests []reconcile.Request
 	for _, p := range policies.Items {
 		for _, ref := range p.Spec.ModelRefs {
-			if ref == model.Name {
+			if ref.Namespace == model.Namespace && ref.Name == model.Name {
 				requests = append(requests, reconcile.Request{
 					NamespacedName: types.NamespacedName{Name: p.Name, Namespace: p.Namespace},
 				})
@@ -648,7 +650,7 @@ func (r *MaaSAuthPolicyReconciler) mapMaaSModelRefToMaaSAuthPolicies(ctx context
 }
 
 // mapHTTPRouteToMaaSAuthPolicies returns reconcile requests for all MaaSAuthPolicies
-// that reference models whose LLMInferenceService lives in the HTTPRoute's namespace.
+// that reference models in the HTTPRoute's namespace.
 func (r *MaaSAuthPolicyReconciler) mapHTTPRouteToMaaSAuthPolicies(ctx context.Context, obj client.Object) []reconcile.Request {
 	route, ok := obj.(*gatewayapiv1.HTTPRoute)
 	if !ok {
@@ -656,20 +658,13 @@ func (r *MaaSAuthPolicyReconciler) mapHTTPRouteToMaaSAuthPolicies(ctx context.Co
 	}
 	// Find MaaSModelRefs in this namespace
 	var models maasv1alpha1.MaaSModelRefList
-	if err := r.List(ctx, &models); err != nil {
+	if err := r.List(ctx, &models, client.InNamespace(route.Namespace)); err != nil {
 		return nil
 	}
 	// Use namespace-qualified keys to prevent cross-namespace matches
 	modelKeysInNS := map[string]bool{}
 	for _, m := range models.Items {
-		ns := m.Spec.ModelRef.Namespace
-		if ns == "" {
-			ns = m.Namespace
-		}
-		if ns == route.Namespace {
-			key := m.Namespace + "/" + m.Name
-			modelKeysInNS[key] = true
-		}
+		modelKeysInNS[m.Namespace+"/"+m.Name] = true
 	}
 	if len(modelKeysInNS) == 0 {
 		return nil
@@ -682,8 +677,7 @@ func (r *MaaSAuthPolicyReconciler) mapHTTPRouteToMaaSAuthPolicies(ctx context.Co
 	var requests []reconcile.Request
 	for _, p := range policies.Items {
 		for _, ref := range p.Spec.ModelRefs {
-			key := p.Namespace + "/" + ref
-			if modelKeysInNS[key] {
+			if modelKeysInNS[ref.Namespace+"/"+ref.Name] {
 				requests = append(requests, reconcile.Request{
 					NamespacedName: types.NamespacedName{Name: p.Name, Namespace: p.Namespace},
 				})
