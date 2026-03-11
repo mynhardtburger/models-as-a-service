@@ -17,9 +17,7 @@ limitations under the License.
 package maas
 
 import (
-	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"fmt"
 	"sort"
@@ -314,12 +312,8 @@ func (r *MaaSSubscriptionReconciler) reconcileTokenRateLimitPolicies(ctx context
 				log.Info("TokenRateLimitPolicy opted out, skipping", "name", policyName)
 			} else {
 				// Snapshot the existing object before modifications so we can detect
-				// no-op updates. We use JSON marshaling (rather than reflect.DeepEqual)
-				// because unstructured maps read from the API server deserialize JSON
-				// numbers as float64, while the controller builds them as int64.
-				// json.Marshal normalizes both to the same representation and sorts
-				// map keys deterministically, making byte comparison reliable.
-				snapshot, _ := json.Marshal(existing.Object)
+				// no-op updates.
+				snapshot := existing.DeepCopy()
 
 				mergedAnnotations := existing.GetAnnotations()
 				if mergedAnnotations == nil {
@@ -342,8 +336,7 @@ func (r *MaaSSubscriptionReconciler) reconcileTokenRateLimitPolicies(ctx context
 					return fmt.Errorf("failed to update spec: %w", err)
 				}
 
-				modified, _ := json.Marshal(existing.Object)
-				if bytes.Equal(snapshot, modified) {
+				if equality.Semantic.DeepEqual(snapshot.Object, existing.Object) {
 					log.Info("TokenRateLimitPolicy unchanged, skipping update", "name", policyName, "model", modelRef.Namespace+"/"+modelRef.Name)
 				} else {
 					if err := r.Update(ctx, existing); err != nil {
