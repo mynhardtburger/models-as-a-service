@@ -25,7 +25,7 @@ import (
 
 	"github.com/go-logr/logr"
 	maasv1alpha1 "github.com/opendatahub-io/models-as-a-service/maas-controller/api/maas/v1alpha1"
-	equality "k8s.io/apimachinery/pkg/api/equality"
+	"k8s.io/apimachinery/pkg/api/equality"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -84,15 +84,17 @@ func (r *MaaSSubscriptionReconciler) Reconcile(ctx context.Context, req ctrl.Req
 		}
 	}
 
+	statusSnapshot := subscription.Status.DeepCopy()
+
 	// Reconcile TokenRateLimitPolicy for each model
 	// IMPORTANT: TokenRateLimitPolicy targets the HTTPRoute for each model
 	if err := r.reconcileTokenRateLimitPolicies(ctx, log, subscription); err != nil {
 		log.Error(err, "failed to reconcile TokenRateLimitPolicies")
-		r.updateStatus(ctx, subscription, "Failed", fmt.Sprintf("Failed to reconcile: %v", err))
+		r.updateStatus(ctx, subscription, "Failed", fmt.Sprintf("Failed to reconcile: %v", err), statusSnapshot)
 		return ctrl.Result{}, err
 	}
 
-	r.updateStatus(ctx, subscription, "Active", "Successfully reconciled")
+	r.updateStatus(ctx, subscription, "Active", "Successfully reconciled", statusSnapshot)
 	return ctrl.Result{}, nil
 }
 
@@ -401,9 +403,7 @@ func (r *MaaSSubscriptionReconciler) handleDeletion(ctx context.Context, log log
 	return ctrl.Result{}, nil
 }
 
-func (r *MaaSSubscriptionReconciler) updateStatus(ctx context.Context, subscription *maasv1alpha1.MaaSSubscription, phase, message string) {
-	snapshot := subscription.Status.DeepCopy()
-
+func (r *MaaSSubscriptionReconciler) updateStatus(ctx context.Context, subscription *maasv1alpha1.MaaSSubscription, phase, message string, statusSnapshot *maasv1alpha1.MaaSSubscriptionStatus) {
 	subscription.Status.Phase = phase
 
 	status := metav1.ConditionTrue
@@ -414,13 +414,14 @@ func (r *MaaSSubscriptionReconciler) updateStatus(ctx context.Context, subscript
 	}
 
 	apimeta.SetStatusCondition(&subscription.Status.Conditions, metav1.Condition{
-		Type:    "Ready",
-		Status:  status,
-		Reason:  reason,
-		Message: message,
+		Type:               "Ready",
+		Status:             status,
+		Reason:             reason,
+		Message:            message,
+		ObservedGeneration: subscription.GetGeneration(),
 	})
 
-	if equality.Semantic.DeepEqual(*snapshot, subscription.Status) {
+	if equality.Semantic.DeepEqual(*statusSnapshot, subscription.Status) {
 		return
 	}
 

@@ -24,7 +24,7 @@ import (
 
 	"github.com/go-logr/logr"
 	maasv1alpha1 "github.com/opendatahub-io/models-as-a-service/maas-controller/api/maas/v1alpha1"
-	equality "k8s.io/apimachinery/pkg/api/equality"
+	"k8s.io/apimachinery/pkg/api/equality"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	apimeta "k8s.io/apimachinery/pkg/api/meta"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -106,15 +106,17 @@ func (r *MaaSAuthPolicyReconciler) Reconcile(ctx context.Context, req ctrl.Reque
 		}
 	}
 
+	statusSnapshot := policy.Status.DeepCopy()
+
 	refs, err := r.reconcileModelAuthPolicies(ctx, log, policy)
 	if err != nil {
 		log.Error(err, "failed to reconcile model AuthPolicies")
-		r.updateStatus(ctx, policy, "Failed", fmt.Sprintf("Failed to reconcile: %v", err))
+		r.updateStatus(ctx, policy, "Failed", fmt.Sprintf("Failed to reconcile: %v", err), statusSnapshot)
 		return ctrl.Result{}, err
 	}
 
 	r.updateAuthPolicyRefStatus(ctx, log, policy, refs)
-	r.updateStatus(ctx, policy, "Active", "Successfully reconciled")
+	r.updateStatus(ctx, policy, "Active", "Successfully reconciled", statusSnapshot)
 	return ctrl.Result{}, nil
 }
 
@@ -550,9 +552,7 @@ func getAuthPolicyConditionState(ap *unstructured.Unstructured) (accepted, enfor
 	return accepted, enforced
 }
 
-func (r *MaaSAuthPolicyReconciler) updateStatus(ctx context.Context, policy *maasv1alpha1.MaaSAuthPolicy, phase, message string) {
-	snapshot := policy.Status.DeepCopy()
-
+func (r *MaaSAuthPolicyReconciler) updateStatus(ctx context.Context, policy *maasv1alpha1.MaaSAuthPolicy, phase, message string, statusSnapshot *maasv1alpha1.MaaSAuthPolicyStatus) {
 	policy.Status.Phase = phase
 
 	status := metav1.ConditionTrue
@@ -563,13 +563,14 @@ func (r *MaaSAuthPolicyReconciler) updateStatus(ctx context.Context, policy *maa
 	}
 
 	apimeta.SetStatusCondition(&policy.Status.Conditions, metav1.Condition{
-		Type:    "Ready",
-		Status:  status,
-		Reason:  reason,
-		Message: message,
+		Type:               "Ready",
+		Status:             status,
+		Reason:             reason,
+		Message:            message,
+		ObservedGeneration: policy.GetGeneration(),
 	})
 
-	if equality.Semantic.DeepEqual(*snapshot, policy.Status) {
+	if equality.Semantic.DeepEqual(*statusSnapshot, policy.Status) {
 		return
 	}
 
