@@ -43,11 +43,11 @@ For OpenShift clusters, use the unified automated deployment script:
 ```bash
 export MAAS_REF="main"  # Use the latest release tag, or "main" for development
 
-# Deploy using RHOAI operator (default)
+# Deploy using ODH operator (default)
 ./scripts/deploy.sh
 
-# Or deploy using ODH operator
-./scripts/deploy.sh --operator-type odh
+# Or deploy using RHOAI operator
+./scripts/deploy.sh --operator-type rhoai
 
 # Or deploy using kustomize
 ./scripts/deploy.sh --deployment-mode kustomize
