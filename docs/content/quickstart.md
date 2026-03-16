@@ -41,6 +41,10 @@ For step-by-step commands, see [TLS Configuration: Authorino TLS Configuration](
 For OpenShift clusters, use the unified automated deployment script:
 
 ```bash
+# Clone the repository
+git clone https://github.com/opendatahub-io/models-as-a-service.git
+cd models-as-a-service
+
 export MAAS_REF="main"  # Use the latest release tag, or "main" for development
 
 # Deploy using RHOAI operator (default)
