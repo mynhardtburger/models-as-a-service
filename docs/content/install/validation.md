@@ -99,7 +99,14 @@ done
 Check that all components are running:
 
 ```bash
-kubectl get pods -n maas-api && \
+# For RHOAI:
+kubectl get pods -n redhat-ods-applications -l app.kubernetes.io/name=maas-api && \
+kubectl get pods -n kuadrant-system && \
+kubectl get pods -n kserve && \
+kubectl get pods -n llm
+
+# For ODH:
+kubectl get pods -n opendatahub -l app.kubernetes.io/name=maas-api && \
 kubectl get pods -n kuadrant-system && \
 kubectl get pods -n kserve && \
 kubectl get pods -n llm
