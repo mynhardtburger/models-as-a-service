@@ -79,13 +79,15 @@ For detailed instructions, see the [Deployment Guide](docs/content/quickstart.md
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `MAAS_API_IMAGE` | Custom MaaS API container image (works in both operator and kustomize modes) | `quay.io/user/maas-api:pr-123` |
+| `MAAS_CONTROLLER_IMAGE` | Custom MaaS controller container image | `quay.io/user/maas-controller:pr-123` |
 | `OPERATOR_CATALOG` | Custom operator catalog | `quay.io/opendatahub/catalog:pr-456` |
 | `OPERATOR_IMAGE` | Custom operator image | `quay.io/opendatahub/operator:pr-456` |
 | `OPERATOR_TYPE` | Operator type (rhoai/odh) | `odh` |
-| `MAAS_CONTROLLER_IMAGE` | Custom MaaS controller container image | `quay.io/user/maas-controller:pr-123` |
 | `LOG_LEVEL` | Logging verbosity | `DEBUG`, `INFO`, `WARN`, `ERROR` |
 
 **Note:** TLS backend is enabled by default. Use `--disable-tls-backend` to disable.
+
+**Note:** The policy engine is auto-determined based on operator type (`rhcl` for RHOAI, `kuadrant` for ODH/kustomize) and does not need to be set manually.
 
 ### Deployment Examples
 
