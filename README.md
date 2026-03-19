@@ -60,7 +60,7 @@ For detailed instructions, see the [Deployment Guide](docs/content/quickstart.md
 | `--deployment-mode` | `operator`, `kustomize` | `operator` | Deployment method |
 | `--operator-type` | `rhoai`, `odh` | `rhoai` | Which operator to install |
 | `--enable-tls-backend` | flag | enabled | TLS for Authorino ↔ MaaS API |
-| `--disable-tls-backend` | flag | - | Disable TLS backend |
+| `--disable-tls-backend` | flag | `false` | Disable TLS backend |
 | `--namespace` | string | auto | Target namespace |
 | `--verbose` | flag | false | Enable debug logging |
 | `--dry-run` | flag | false | Show plan without executing |
