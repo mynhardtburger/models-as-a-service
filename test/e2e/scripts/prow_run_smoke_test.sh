@@ -800,4 +800,4 @@ run_e2e_tests
 print_header "Validating Deployment"
 validate_deployment
 
-echo "🎉 Deployment completed successfully!"
+echo "Deployment completed successfully!"
