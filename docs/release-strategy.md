@@ -56,7 +56,7 @@ These show how many commits are pending promotion between upstream branches:
 | Promotion | Commits Difference | Last Commit |
 | --- | :---: | --- |
 | `main` → `stable` | ![main to stable](https://img.shields.io/github/commits-difference/opendatahub-io/models-as-a-service?base=stable&head=main&label=%20) | ![GitHub last commit (stable)](https://img.shields.io/github/last-commit/opendatahub-io/models-as-a-service/stable?label=stable) |
-| `stable` → `rhoai` | ![stable to rhoai](https://img.shields.io/github/commits-difference/opendatahub-io/models-as-a-service?base=rhoai&head=stable&label=%20) | ![GitHub last commit (rhaoi)](https://img.shields.io/github/last-commit/opendatahub-io/models-as-a-service/rhoai?label=rhoai) |
+| `stable` → `rhoai` | ![stable to rhoai](https://img.shields.io/github/commits-difference/opendatahub-io/models-as-a-service?base=rhoai&head=stable&label=%20) | ![GitHub last commit (rhoai)](https://img.shields.io/github/last-commit/opendatahub-io/models-as-a-service/rhoai?label=rhoai) |
 
 ### Downstream Release Branches
 
