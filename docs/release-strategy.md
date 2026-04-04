@@ -55,22 +55,22 @@ These show how many commits are pending promotion between upstream branches:
 
 | Promotion | Commits Difference | Last Commit |
 | --- | :---: | --- |
-| `main` → `stable` | [![main to stable][img-main-to-stable]][cmp-main-to-stable] | ![stable][img-last-stable] |
-| `stable` → `rhoai` | [![stable to rhoai][img-stable-to-rhoai]][cmp-stable-to-rhoai] | ![rhoai][img-last-rhoai] |
+| `main` → `stable` | [![main to stable][img-main-to-stable]][cmp-main-to-stable] | [![stable][img-last-stable]][commits-stable] |
+| `stable` → `rhoai` | [![stable to rhoai][img-stable-to-rhoai]][cmp-stable-to-rhoai] | [![rhoai][img-last-rhoai]][commits-rhoai] |
 
 ### Downstream Release Branches
 
 Each row shows how far behind a `downstream` [red-hat-data-services](https://github.com/red-hat-data-services/models-as-a-service) release branch is from the `upstream` [opendatahub-io](https://github.com/opendatahub-io/models-as-a-service) source branches:
 
-| `downstream` branch <br>Last Commit | vs `upstream/main`<br>Commit Difference | vs `upstream/stable`<br>Commit Difference | vs `upstream/rhoai`<br>Commit Difference |
+| `downstream` branch | vs `upstream/main`<br>Commit Difference | vs `upstream/stable`<br>Commit Difference | vs `upstream/rhoai`<br>Commit Difference |
 | --- | :---: | :---: | :---: |
-| ![main][img-last-ds-main] | [![diff][img-ds-main-vs-main]][cmp-ds-main-vs-main] | [![diff][img-ds-main-vs-stable]][cmp-ds-main-vs-stable] | [![diff][img-ds-main-vs-rhoai]][cmp-ds-main-vs-rhoai] |
-| ![rhoai-3.4][img-last-ds-rhoai-3.4] | [![diff][img-ds-rhoai-3.4-vs-main]][cmp-ds-rhoai-3.4-vs-main] | [![diff][img-ds-rhoai-3.4-vs-stable]][cmp-ds-rhoai-3.4-vs-stable] | [![diff][img-ds-rhoai-3.4-vs-rhoai]][cmp-ds-rhoai-3.4-vs-rhoai] |
-| ![rhoai-3.4-ea.2][img-last-ds-rhoai-3.4-ea.2] | [![diff][img-ds-rhoai-3.4-ea.2-vs-main]][cmp-ds-rhoai-3.4-ea.2-vs-main] | [![diff][img-ds-rhoai-3.4-ea.2-vs-stable]][cmp-ds-rhoai-3.4-ea.2-vs-stable] | [![diff][img-ds-rhoai-3.4-ea.2-vs-rhoai]][cmp-ds-rhoai-3.4-ea.2-vs-rhoai] |
-| ![rhoai-3.4-ea.1][img-last-ds-rhoai-3.4-ea.1] | [![diff][img-ds-rhoai-3.4-ea.1-vs-main]][cmp-ds-rhoai-3.4-ea.1-vs-main] | [![diff][img-ds-rhoai-3.4-ea.1-vs-stable]][cmp-ds-rhoai-3.4-ea.1-vs-stable] | [![diff][img-ds-rhoai-3.4-ea.1-vs-rhoai]][cmp-ds-rhoai-3.4-ea.1-vs-rhoai] |
-| ![rhoai-3.3][img-last-ds-rhoai-3.3] | [![diff][img-ds-rhoai-3.3-vs-main]][cmp-ds-rhoai-3.3-vs-main] | [![diff][img-ds-rhoai-3.3-vs-stable]][cmp-ds-rhoai-3.3-vs-stable] | [![diff][img-ds-rhoai-3.3-vs-rhoai]][cmp-ds-rhoai-3.3-vs-rhoai] |
-| ![rhoai-3.2][img-last-ds-rhoai-3.2] | [![diff][img-ds-rhoai-3.2-vs-main]][cmp-ds-rhoai-3.2-vs-main] | [![diff][img-ds-rhoai-3.2-vs-stable]][cmp-ds-rhoai-3.2-vs-stable] | [![diff][img-ds-rhoai-3.2-vs-rhoai]][cmp-ds-rhoai-3.2-vs-rhoai] |
-| ![rhoai-3.0][img-last-ds-rhoai-3.0] | [![diff][img-ds-rhoai-3.0-vs-main]][cmp-ds-rhoai-3.0-vs-main] | [![diff][img-ds-rhoai-3.0-vs-stable]][cmp-ds-rhoai-3.0-vs-stable] | [![diff][img-ds-rhoai-3.0-vs-rhoai]][cmp-ds-rhoai-3.0-vs-rhoai] |
+| [![main][img-last-ds-main]][commits-ds-main] | [![diff][img-ds-main-vs-main]][cmp-ds-main-vs-main] | [![diff][img-ds-main-vs-stable]][cmp-ds-main-vs-stable] | [![diff][img-ds-main-vs-rhoai]][cmp-ds-main-vs-rhoai] |
+| [![rhoai-3.4][img-last-ds-rhoai-3.4]][commits-ds-rhoai-3.4] | [![diff][img-ds-rhoai-3.4-vs-main]][cmp-ds-rhoai-3.4-vs-main] | [![diff][img-ds-rhoai-3.4-vs-stable]][cmp-ds-rhoai-3.4-vs-stable] | [![diff][img-ds-rhoai-3.4-vs-rhoai]][cmp-ds-rhoai-3.4-vs-rhoai] |
+| [![rhoai-3.4-ea.2][img-last-ds-rhoai-3.4-ea.2]][commits-ds-rhoai-3.4-ea.2] | [![diff][img-ds-rhoai-3.4-ea.2-vs-main]][cmp-ds-rhoai-3.4-ea.2-vs-main] | [![diff][img-ds-rhoai-3.4-ea.2-vs-stable]][cmp-ds-rhoai-3.4-ea.2-vs-stable] | [![diff][img-ds-rhoai-3.4-ea.2-vs-rhoai]][cmp-ds-rhoai-3.4-ea.2-vs-rhoai] |
+| [![rhoai-3.4-ea.1][img-last-ds-rhoai-3.4-ea.1]][commits-ds-rhoai-3.4-ea.1] | [![diff][img-ds-rhoai-3.4-ea.1-vs-main]][cmp-ds-rhoai-3.4-ea.1-vs-main] | [![diff][img-ds-rhoai-3.4-ea.1-vs-stable]][cmp-ds-rhoai-3.4-ea.1-vs-stable] | [![diff][img-ds-rhoai-3.4-ea.1-vs-rhoai]][cmp-ds-rhoai-3.4-ea.1-vs-rhoai] |
+| [![rhoai-3.3][img-last-ds-rhoai-3.3]][commits-ds-rhoai-3.3] | [![diff][img-ds-rhoai-3.3-vs-main]][cmp-ds-rhoai-3.3-vs-main] | [![diff][img-ds-rhoai-3.3-vs-stable]][cmp-ds-rhoai-3.3-vs-stable] | [![diff][img-ds-rhoai-3.3-vs-rhoai]][cmp-ds-rhoai-3.3-vs-rhoai] |
+| [![rhoai-3.2][img-last-ds-rhoai-3.2]][commits-ds-rhoai-3.2] | [![diff][img-ds-rhoai-3.2-vs-main]][cmp-ds-rhoai-3.2-vs-main] | [![diff][img-ds-rhoai-3.2-vs-stable]][cmp-ds-rhoai-3.2-vs-stable] | [![diff][img-ds-rhoai-3.2-vs-rhoai]][cmp-ds-rhoai-3.2-vs-rhoai] |
+| [![rhoai-3.0][img-last-ds-rhoai-3.0]][commits-ds-rhoai-3.0] | [![diff][img-ds-rhoai-3.0-vs-main]][cmp-ds-rhoai-3.0-vs-main] | [![diff][img-ds-rhoai-3.0-vs-stable]][cmp-ds-rhoai-3.0-vs-stable] | [![diff][img-ds-rhoai-3.0-vs-rhoai]][cmp-ds-rhoai-3.0-vs-rhoai] |
 
 > **Note:** When new downstream release branches are created (e.g. `rhoai-3.5`), add a corresponding row to the table above.
 
@@ -80,11 +80,13 @@ Each row shows how far behind a `downstream` [red-hat-data-services](https://git
 [img-last-stable]: https://img.shields.io/github/last-commit/opendatahub-io/models-as-a-service/stable?label=stable&cacheSeconds=3600
 [img-last-rhoai]: https://img.shields.io/github/last-commit/opendatahub-io/models-as-a-service/rhoai?label=rhoai&cacheSeconds=3600
 
-<!-- Upstream compare links -->
+<!-- Upstream commit history and compare links -->
+[commits-stable]: https://github.com/opendatahub-io/models-as-a-service/commits/stable
+[commits-rhoai]: https://github.com/opendatahub-io/models-as-a-service/commits/rhoai
 [cmp-main-to-stable]: https://github.com/opendatahub-io/models-as-a-service/compare/stable...main
 [cmp-stable-to-rhoai]: https://github.com/opendatahub-io/models-as-a-service/compare/rhoai...stable
 
-<!-- Downstream last-commit badge images -->
+<!-- Downstream last-commit badge images and commit history links -->
 [img-last-ds-main]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/main?label=main&cacheSeconds=3600
 [img-last-ds-rhoai-3.4]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/rhoai-3.4?label=rhoai-3.4&cacheSeconds=3600
 [img-last-ds-rhoai-3.4-ea.2]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/rhoai-3.4-ea.2?label=rhoai-3.4-ea.2&cacheSeconds=3600
@@ -92,6 +94,13 @@ Each row shows how far behind a `downstream` [red-hat-data-services](https://git
 [img-last-ds-rhoai-3.3]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/rhoai-3.3?label=rhoai-3.3&cacheSeconds=3600
 [img-last-ds-rhoai-3.2]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/rhoai-3.2?label=rhoai-3.2&cacheSeconds=3600
 [img-last-ds-rhoai-3.0]: https://img.shields.io/github/last-commit/red-hat-data-services/models-as-a-service/rhoai-3.0?label=rhoai-3.0&cacheSeconds=3600
+[commits-ds-main]: https://github.com/red-hat-data-services/models-as-a-service/commits/main
+[commits-ds-rhoai-3.4]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.4
+[commits-ds-rhoai-3.4-ea.2]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.4-ea.2
+[commits-ds-rhoai-3.4-ea.1]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.4-ea.1
+[commits-ds-rhoai-3.3]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.3
+[commits-ds-rhoai-3.2]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.2
+[commits-ds-rhoai-3.0]: https://github.com/red-hat-data-services/models-as-a-service/commits/rhoai-3.0
 
 <!-- Downstream commit-difference badge images: ds-{branch}-vs-{upstream} -->
 [img-ds-main-vs-main]: https://img.shields.io/github/commits-difference/opendatahub-io/models-as-a-service?base=red-hat-data-services:main&head=main&label=%20&cacheSeconds=3600
