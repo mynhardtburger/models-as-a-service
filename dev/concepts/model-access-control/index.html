@@ -8,31 +8,31 @@
       
       
       
-        <link rel="canonical" href="https://opendatahub-io.github.io/models-as-a-service/dev/architecture/">
+        <link rel="canonical" href="https://opendatahub-io.github.io/models-as-a-service/dev/concepts/model-access-control/">
       
       
-        <link rel="prev" href="../migration/tier-to-subscription/">
+        <link rel="prev" href="../api-key-authentication/">
       
       
-        <link rel="next" href="../configuration-and-management/subscription-overview/">
+        <link rel="next" href="../../quickstart/">
       
       
         
       
       
-      <link rel="icon" href="../assets/favicon.ico">
+      <link rel="icon" href="../../assets/favicon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Architecture - ODH Models-as-a-Service Documentation</title>
+        <title>Model Access Control - ODH Models-as-a-Service Documentation</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -51,7 +51,7 @@
       
     
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#maas-platform-architecture" class="md-skip">
+        <a href="#model-access-control" class="md-skip">
           Skip to content
         </a>
       
@@ -94,9 +94,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="ODH Models-as-a-Service Documentation" class="md-header__button md-logo" aria-label="ODH Models-as-a-Service Documentation" data-md-component="logo">
+    <a href="../.." title="ODH Models-as-a-Service Documentation" class="md-header__button md-logo" aria-label="ODH Models-as-a-Service Documentation" data-md-component="logo">
       
-  <img src="../assets/favicon.ico" alt="logo">
+  <img src="../../assets/favicon.ico" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Architecture
+              Model Access Control
             
           </span>
         </div>
@@ -233,7 +233,7 @@
     
     
       <li class="md-tabs__item">
-        <a href=".." class="md-tabs__link">
+        <a href="../.." class="md-tabs__link">
           
   
   
@@ -255,7 +255,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="./" class="md-tabs__link">
+        <a href="../architecture/" class="md-tabs__link">
           
   
   
@@ -275,7 +275,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../quickstart/" class="md-tabs__link">
+        <a href="../../quickstart/" class="md-tabs__link">
           
   
   
@@ -302,7 +302,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../configuration-and-management/quota-and-access-configuration/" class="md-tabs__link">
+        <a href="../../configuration-and-management/quota-and-access-configuration/" class="md-tabs__link">
           
   
   
@@ -325,7 +325,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../user-guide/self-service-model-access/" class="md-tabs__link">
+        <a href="../../user-guide/api-key-management/" class="md-tabs__link">
           
   
   
@@ -345,7 +345,27 @@
     
     
       <li class="md-tabs__item">
-        <a href="../reference/maas-api-overview/" class="md-tabs__link">
+        <a href="../../contributing/testing-guide/" class="md-tabs__link">
+          
+  
+  
+  Contributing
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../reference/maas-api-overview/" class="md-tabs__link">
           
   
   
@@ -379,9 +399,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="ODH Models-as-a-Service Documentation" class="md-nav__button md-logo" aria-label="ODH Models-as-a-Service Documentation" data-md-component="logo">
+    <a href="../.." title="ODH Models-as-a-Service Documentation" class="md-nav__button md-logo" aria-label="ODH Models-as-a-Service Documentation" data-md-component="logo">
       
-  <img src="../assets/favicon.ico" alt="logo">
+  <img src="../../assets/favicon.ico" alt="logo">
 
     </a>
     ODH Models-as-a-Service Documentation
@@ -462,7 +482,7 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="../.." class="md-nav__link">
         
   
   
@@ -490,7 +510,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../release-notes/" class="md-nav__link">
+      <a href="../../release-notes/" class="md-nav__link">
         
   
   
@@ -572,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../migration/tier-to-subscription/" class="md-nav__link">
+      <a href="../../migration/tier-to-subscription/" class="md-nav__link">
         
   
   
@@ -669,6 +689,146 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../subscription-overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access and Quota Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../model-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../api-key-authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Key Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -688,7 +848,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Model Access Control
   
 
     
@@ -706,7 +866,7 @@
   <span class="md-ellipsis">
     
   
-    Architecture
+    Model Access Control
   
 
     
@@ -743,22 +903,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#model-discovery-implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Model Discovery Implementation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Architecture">
+    <nav class="md-nav" aria-label="Model Discovery Implementation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#high-level-architecture" class="md-nav__link">
+  <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🏗️ High-Level Architecture
+        How It Works
       
     </span>
   </a>
@@ -766,54 +926,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#key-minting-flow-request-validation" class="md-nav__link">
+  <a href="#interim-oidc-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Minting Flow — Request &amp; Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-minting-service-default-implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Minting Service (Default Implementation)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#inference-flow-through-maas-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inference Flow — Through MaaS Objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#auth-validation-flow-deep-dive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Auth &amp; Validation Flow (Deep Dive)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#observability-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Observability Flow
+        Interim OIDC Flow
       
     </span>
   </a>
@@ -826,22 +942,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#component-flows" class="md-nav__link">
+  <a href="#authpolicy-and-subscription-interaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔄 Component Flows
+        AuthPolicy and Subscription Interaction
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔄 Component Flows">
+    <nav class="md-nav" aria-label="AuthPolicy and Subscription Interaction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-api-key-creation-flow-maas-api" class="md-nav__link">
+  <a href="#maasauthpolicy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. API Key Creation Flow (MaaS API)
+        MaaSAuthPolicy
       
     </span>
   </a>
@@ -849,10 +965,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-model-inference-flow" class="md-nav__link">
+  <a href="#maassubscription" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Model Inference Flow
+        MaaSSubscription
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-decision-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access Decision Flow
       
     </span>
   </a>
@@ -864,66 +991,21 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configuration-and-management/subscription-overview/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Access and Quota Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configuration-and-management/maas-models/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaaS Models
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -997,7 +1079,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../quickstart/" class="md-nav__link">
+      <a href="../../quickstart/" class="md-nav__link">
         
   
   
@@ -1079,7 +1161,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/prerequisites/" class="md-nav__link">
+      <a href="../../install/prerequisites/" class="md-nav__link">
         
   
   
@@ -1107,7 +1189,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/platform-setup/" class="md-nav__link">
+      <a href="../../install/platform-setup/" class="md-nav__link">
         
   
   
@@ -1197,7 +1279,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/maas-setup/" class="md-nav__link">
+      <a href="../../install/maas-setup/" class="md-nav__link">
         
   
   
@@ -1225,14 +1307,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/model-setup/" class="md-nav__link">
+      <a href="../../install/model-setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Model Setup (On Cluster)
+    Model Setup
   
 
     
@@ -1253,7 +1335,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/validation/" class="md-nav__link">
+      <a href="../../install/external-model-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External Model Setup (Tech Preview)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/validation/" class="md-nav__link">
         
   
   
@@ -1281,7 +1391,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../install/troubleshooting/" class="md-nav__link">
+      <a href="../../install/troubleshooting/" class="md-nav__link">
         
   
   
@@ -1432,7 +1542,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/quota-and-access-configuration/" class="md-nav__link">
+      <a href="../../configuration-and-management/quota-and-access-configuration/" class="md-nav__link">
         
   
   
@@ -1460,14 +1570,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/token-management/" class="md-nav__link">
+      <a href="../../configuration-and-management/api-key-administration/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Token Management
+    API Key Administration
   
 
     
@@ -1488,7 +1598,63 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/tls-configuration/" class="md-nav__link">
+      <a href="../../configuration-and-management/namespace-rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace User Permissions (RBAC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration-and-management/troubleshooting-external-model-rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting ExternalModel RBAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../configuration-and-management/tls-configuration/" class="md-nav__link">
         
   
   
@@ -1516,14 +1682,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/subscription-known-issues/" class="md-nav__link">
+      <a href="../../configuration-and-management/gateway-patterns/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Subscription Known Issues
+    Gateway Patterns
   
 
     
@@ -1606,14 +1772,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/model-setup/" class="md-nav__link">
+      <a href="../../configuration-and-management/model-setup/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Model Setup (On Cluster)
+    Model Setup
   
 
     
@@ -1634,7 +1800,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/model-listing-flow/" class="md-nav__link">
+      <a href="../../configuration-and-management/model-listing-flow/" class="md-nav__link">
         
   
   
@@ -1642,34 +1808,6 @@
     
   
     Model Listing Flow
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configuration-and-management/maas-model-kinds/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaaS Model Kinds
   
 
     
@@ -1752,7 +1890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../configuration-and-management/maas-controller-overview/" class="md-nav__link">
+      <a href="../../configuration-and-management/maas-controller-overview/" class="md-nav__link">
         
   
   
@@ -1760,34 +1898,6 @@
     
   
     Controller Overview
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../configuration-and-management/crd-annotations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CRD Annotations
   
 
     
@@ -1870,14 +1980,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced-administration/observability/" class="md-nav__link">
+      <a href="../../advanced-administration/observability/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Observability
+    Observability Dashboard
   
 
     
@@ -1898,7 +2008,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced-administration/limitador-persistence/" class="md-nav__link">
+      <a href="../../advanced-administration/limitador-persistence/" class="md-nav__link">
         
   
   
@@ -1926,14 +2036,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced-administration/subscription-cardinality/" class="md-nav__link">
+      <a href="../../configuration-and-management/authorino-caching/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Subscription Cardinality
+    Authorino Caching
   
 
     
@@ -2023,14 +2133,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../user-guide/self-service-model-access/" class="md-nav__link">
+      <a href="../../user-guide/api-key-management/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Self Service Model Access
+    API Key Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/model-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Discovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference
   
 
     
@@ -2083,7 +2249,7 @@
   <span class="md-ellipsis">
     
   
-    API Reference
+    Contributing
   
 
     
@@ -2096,6 +2262,95 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MaaS Testing and Contribution Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2112,7 +2367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/maas-api-overview/" class="md-nav__link">
+      <a href="../../reference/maas-api-overview/" class="md-nav__link">
         
   
   
@@ -2140,7 +2395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/api-reference/" class="md-nav__link">
+      <a href="../../reference/api-reference/" class="md-nav__link">
         
   
   
@@ -2183,10 +2438,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
             
   
   
@@ -2204,8 +2459,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2222,7 +2477,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/crds/maas-model-ref/" class="md-nav__link">
+      <a href="../../reference/crds/maas-model-ref/" class="md-nav__link">
         
   
   
@@ -2250,7 +2505,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/crds/external-model/" class="md-nav__link">
+      <a href="../../reference/crds/external-model/" class="md-nav__link">
         
   
   
@@ -2278,7 +2533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/crds/maas-auth-policy/" class="md-nav__link">
+      <a href="../../reference/crds/maas-auth-policy/" class="md-nav__link">
         
   
   
@@ -2306,7 +2561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/crds/maas-subscription/" class="md-nav__link">
+      <a href="../../reference/crds/maas-subscription/" class="md-nav__link">
         
   
   
@@ -2314,6 +2569,34 @@
     
   
     MaaSSubscription
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/crds/tenant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenant
   
 
     
@@ -2380,22 +2663,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#architecture" class="md-nav__link">
+  <a href="#model-discovery-implementation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Architecture
+        Model Discovery Implementation
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Architecture">
+    <nav class="md-nav" aria-label="Model Discovery Implementation">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#high-level-architecture" class="md-nav__link">
+  <a href="#how-it-works" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🏗️ High-Level Architecture
+        How It Works
       
     </span>
   </a>
@@ -2403,54 +2686,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#key-minting-flow-request-validation" class="md-nav__link">
+  <a href="#interim-oidc-flow" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Key Minting Flow — Request &amp; Validation
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#key-minting-service-default-implementation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Key Minting Service (Default Implementation)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#inference-flow-through-maas-objects" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Inference Flow — Through MaaS Objects
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#auth-validation-flow-deep-dive" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Auth &amp; Validation Flow (Deep Dive)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#observability-flow" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Observability Flow
+        Interim OIDC Flow
       
     </span>
   </a>
@@ -2463,22 +2702,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#component-flows" class="md-nav__link">
+  <a href="#authpolicy-and-subscription-interaction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🔄 Component Flows
+        AuthPolicy and Subscription Interaction
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="🔄 Component Flows">
+    <nav class="md-nav" aria-label="AuthPolicy and Subscription Interaction">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-api-key-creation-flow-maas-api" class="md-nav__link">
+  <a href="#maasauthpolicy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. API Key Creation Flow (MaaS API)
+        MaaSAuthPolicy
       
     </span>
   </a>
@@ -2486,10 +2725,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-model-inference-flow" class="md-nav__link">
+  <a href="#maassubscription" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Model Inference Flow
+        MaaSSubscription
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-decision-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Access Decision Flow
       
     </span>
   </a>
@@ -2498,6 +2748,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related Documentation
+      
+    </span>
+  </a>
   
 </li>
       
@@ -2521,311 +2782,102 @@
   
 
 
-<h1 id="maas-platform-architecture">MaaS Platform Architecture</h1>
-<h2 id="overview">Overview</h2>
-<p>The MaaS Platform is a Kubernetes-native layer for AI model serving built on <a href="https://gateway-api.sigs.k8s.io/">Gateway API</a> and policy controllers (<a href="https://docs.kuadrant.io/">Kuadrant</a>, <a href="https://docs.kuadrant.io/1.0.x/authorino/">Authorino</a>, <a href="https://docs.kuadrant.io/1.0.x/limitador/">Limitador</a>). It provides policy-based authentication and authorization, plus subscription-based rate limiting. Future work includes improved request routing and discovery.</p>
-<h2 id="architecture">Architecture</h2>
-<h3 id="high-level-architecture">🏗️ High-Level Architecture</h3>
-<p>The MaaS Platform is an end-to-end solution built on <a href="https://docs.kuadrant.io/">Kuadrant</a>.</p>
-<p>All traffic flows through the Gateway    <strong>maas-default-gateway</strong> (Gateway API). Then utilizes <a href="https://docs.kuadrant.io/1.0.x/authorino/">Authorino</a> to enforcing authentication, authorization and <a href="https://docs.kuadrant.io/1.0.x/limitador/">Limitador</a> to enforce and track token usage. Auth policies use <strong>caching</strong> (e.g., subscription selection results, API key validation) to reduce latency on the hot path.</p>
-<p><strong>Main Flows:</strong></p>
+<h1 id="model-access-control">Model Access Control</h1>
+<p>This page explains how the MaaS platform determines which models a user can access. For practical guides, see:</p>
 <ul>
-<li><strong>Key Minting</strong> — For obtaining API keys to authenticate programmatic access. </li>
-<li><strong>Inference</strong> — For calling models to generate completions.</li>
+<li><a href="../../user-guide/model-discovery/">Model Discovery</a> - Listing available models</li>
+<li><a href="../../user-guide/inference/">Inference</a> - Making inference requests</li>
+<li><a href="../../configuration-and-management/quota-and-access-configuration/">Quota and Access Configuration</a> - For administrators</li>
 </ul>
-<pre class="mermaid"><code>graph TB
-    subgraph UserLayer["User Layer"]
-        User[User]
-    end
-
-    subgraph GatewayPolicyLayer["Gateway &amp; Policy Layer"]
-        Gateway[Gateway]
-        AuthPolicy[AuthPolicy]
-        MaaSAuthPolicy[MaaSAuthPolicy]
-        MaaSSubscription[MaaSSubscription]
-    end
-
-    subgraph TokenManagementLayer["Token Management Layer"]
-        MaaSAPI[MaaS API]
-    end
-
-    subgraph ModelServingLayer["Model Serving Layer"]
-        InferenceService[Inference Service]
-        LLM[LLM]
-    end
-
-    User --&gt;|"Request Key"| Gateway
-    Gateway --&gt; AuthPolicy
-    AuthPolicy --&gt; MaaSAPI
-    MaaSAPI --&gt;|"Return API Key"| User
-
-    User --&gt;|"Inference"| Gateway
-    Gateway --&gt; MaaSAuthPolicy
-    MaaSAuthPolicy -.-&gt;|"Validate API Key"| MaaSAPI
-    MaaSAuthPolicy --&gt;|"Rate Limit"| MaaSSubscription
-    MaaSSubscription --&gt; InferenceService
-    InferenceService --&gt; LLM
-    LLM --&gt;|"Return Response"| User
-
-    linkStyle 0,1,2,3 stroke:#1976d2,stroke-width:2px
-    linkStyle 4,5,6,7,8,9,10 stroke:#388e3c,stroke-width:2px
-
-    style MaaSAPI fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style Gateway fill:#7b1fa2,stroke:#333,stroke-width:2px,color:#fff
-    style AuthPolicy fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style MaaSAuthPolicy fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style MaaSSubscription fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style InferenceService fill:#388e3c,stroke:#333,stroke-width:2px,color:#fff
-    style LLM fill:#388e3c,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<h3 id="key-minting-flow-request-validation">Key Minting Flow — Request &amp; Validation</h3>
-<p><strong>Flow summary:</strong></p>
+<hr />
+<h2 id="overview">Overview</h2>
+<p>Access to models in MaaS requires both <strong>permission</strong> (MaaSAuthPolicy) and <strong>quota</strong> (MaaSSubscription):</p>
+<ul>
+<li><strong>MaaSAuthPolicy</strong> defines which groups can access which models</li>
+<li><strong>MaaSSubscription</strong> defines token rate limits and model availability for owner groups</li>
+<li><strong>API keys</strong> bind to one subscription at creation and inherit group membership</li>
+</ul>
+<p>A user must match both a MaaSAuthPolicy and a MaaSSubscription to access a model.</p>
+<hr />
+<h2 id="model-discovery-implementation">Model Discovery Implementation</h2>
+<p>The <code>/v1/models</code> endpoint allows you to discover which models you're authorized to access. The API forwards the same <code>Authorization</code> header you send to each model route, so the result depends on what those model routes accept.</p>
+<h3 id="how-it-works">How It Works</h3>
+<p>When you call <strong>GET /v1/models</strong> with an <strong>Authorization</strong> header, the API passes that header <strong>as-is</strong> to each model's <code>/v1/models</code> endpoint to validate access. Only models that return 2xx or 405 are included in the list. No token exchange or modification is performed; the same header you send is used for the probe.</p>
+<pre class="mermaid"><code>flowchart LR
+    A[Your Request\nAuthorization header] --&gt; B[List MaaSModelRefs]
+    B --&gt; C[Probe each model endpoint\nwith same header]
+    C --&gt; D[Return only models\nthat allow access]</code></pre>
+<p>This means you can:</p>
 <ol>
-<li>User sends <code>POST /v1/api-keys</code> with Bearer <code>{identity-token}</code>.</li>
-<li>Gateway routes the request to AuthPolicy (Authorino).</li>
-<li>AuthPolicy validates the presented identity token via the configured auth method (<code>kubernetesTokenReview</code> for OpenShift, or OIDC JWT validation when enabled).</li>
-<li>Gateway forwards the authenticated request and user context to the Key Minting Service.</li>
+<li><strong>Use an API key</strong> — this is the most portable option because the current model-route AuthPolicies already validate <code>sk-oai-*</code> keys.</li>
+<li><strong>Use an identity token directly</strong> — only when the model routes themselves accept that token type.</li>
+<li><strong>Create a key first for the interim OIDC flow</strong> — when OIDC is enabled only on the <code>maas-api</code> route, use your OIDC token to call <code>POST /v1/api-keys</code>, then call <code>/v1/models</code> with the minted API key.</li>
 </ol>
-<pre class="mermaid"><code>graph TB
-    subgraph UserLayer["User"]
-        U[User]
-    end
-
-    subgraph GatewayLayer["Gateway &amp; Policy"]
-        G[Gateway]
-        AP[AuthPolicy&lt;br/&gt;Authorino]
-    end
-
-    subgraph KeyMintingLayer["MaaS API"]
-        KMS[MaaS API]
-    end
-
-    U --&gt;|"1. POST /v1/api-keys&lt;br/&gt;Bearer {identity-token}"| G
-    G --&gt;|"2. Route /maas-api"| AP
-    AP --&gt;|"3. Validate identity token&lt;br/&gt;TokenReview or OIDC JWT"| G
-    G --&gt;|"4. Forward + user context"| KMS
-
-    style KMS fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style G fill:#7b1fa2,stroke:#333,stroke-width:2px,color:#fff
-    style AP fill:#e65100,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">OIDC Support</p>
-<p>The <code>maas-api</code> route can be configured to validate external OIDC tokens (for example Keycloak-issued JWTs) in addition to the existing OpenShift TokenReview flow. Model routes still use the current API-key policy, so the interim OIDC flow is: authenticate with OIDC at <code>maas-api</code>, mint an <code>sk-oai-*</code> key, then use that key for model discovery and inference.</p>
-</div>
-<h3 id="key-minting-service-default-implementation">Key Minting Service (Default Implementation)</h3>
-<p><strong>Flow summary:</strong></p>
-<ol>
-<li>Gateway forwards the authenticated request and user context to the Key Minting Service (MaaS API).</li>
-<li>The service generates a random <code>sk-oai-*</code> key and hashes it with SHA-256.</li>
-<li>Only the hash and metadata (username, groups, name, optional <code>expiresAt</code> when TTL is set) are stored in PostgreSQL.</li>
-<li>The plaintext key is returned to the user <strong>once</strong>, along with <code>expiresAt</code> when a TTL was specified; the key cannot be retrieved again.</li>
-</ol>
-<p>Keys can be permanent (no expiration) or have an optional <strong>TTL</strong> (<code>expiresIn</code>, e.g., <code>30d</code>, <code>90d</code>, <code>1h</code>); the response includes <code>expiresAt</code> when a TTL is set.</p>
-<pre class="mermaid"><code>graph TB
-    subgraph UserLayer["User"]
-        U[User]
-    end
-
-    subgraph GatewayLayer["Gateway &amp; Policy"]
-        G[Gateway]
-    end
-
-    subgraph KeyMintingService["Key Minting Service (Default)"]
-        API[MaaS API]
-        Gen[Generate sk-oai-* key]
-        Hash[Hash with SHA-256]
-    end
-
-    subgraph Storage["Storage (Default)"]
-        DB[(PostgreSQL&lt;br/&gt;key hashes + metadata + TTL)]
-    end
-
-    U --&gt; G
-    G --&gt;|"Forward + user context"| API
-    API --&gt; Gen
-    Gen --&gt; Hash
-    Hash --&gt;|"Store hash + expiresAt"| DB
-    API --&gt;|"Return key ONCE"| U
-
-    style API fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style G fill:#7b1fa2,stroke:#333,stroke-width:2px,color:#fff
-    style DB fill:#336791,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<div class="admonition tip">
-<p class="admonition-title">Future Plans</p>
-<p>This is the <strong>default implementation</strong>. Future plans include integration with other key store providers (e.g., HashiCorp Vault, cloud secret managers).</p>
-</div>
 <div class="admonition note">
-<p class="admonition-title">PostgreSQL</p>
-<p>A <strong>PostgreSQL database is required</strong> and is <strong>not included</strong> with the MaaS deployment. The deploy script provides a basic PostgreSQL deployment for development and testing—<strong>this is not intended for production use</strong>. For production, provision and configure your own PostgreSQL instance.</p>
+<p class="admonition-title">Inference vs listing</p>
+<p>Inference (calls to each model's chat/completions URL) requires an API key in <code>Authorization: Bearer</code> only. Do not send <code>X-MaaS-Subscription</code> on inference—the subscription is the one bound at API key mint time. <code>GET /v1/models</code> accepts either an API key or an OpenShift token; with a user token, <code>X-MaaS-Subscription</code> remains supported for filtering.</p>
 </div>
-<h3 id="inference-flow-through-maas-objects">Inference Flow — Through MaaS Objects</h3>
-<p><strong>Flow summary:</strong></p>
+<h3 id="interim-oidc-flow">Interim OIDC Flow</h3>
+<p>When the <code>maas-api</code> AuthPolicy is configured for OIDC but model HTTPRoutes still use the existing API-key-only policy, the flow is:</p>
 <ol>
-<li>User sends inference request with an API key.</li>
-<li>Gateway routes to MaaSAuthPolicy (Authorino).</li>
-<li>MaaSAuthPolicy validates the key via MaaS API and selects subscription; on failure returns 401/403.</li>
-<li>MaaSSubscription (Limitador) checks token rate limits; on exceed returns 429.</li>
-<li>Request reaches Inference Service and LLM; completion returned to user.</li>
+<li>Authenticate to your IdP and obtain an OIDC access token.</li>
+<li>Call <code>POST /v1/api-keys</code> with that OIDC token.</li>
+<li>Use the returned <code>sk-oai-*</code> key for <code>GET /v1/models</code> and inference requests.</li>
 </ol>
-<pre class="mermaid"><code>graph TB
-    subgraph UserLayer["User"]
-        U[User]
-    end
-
-    subgraph GatewayLayer["Gateway &amp; Policy"]
-        G[Gateway]
-        MAP[MaaSAuthPolicy&lt;br/&gt;Authorino]
-        MS[MaaSSubscription&lt;br/&gt;Limitador]
-    end
-
-    subgraph MaaSLayer["Token Management"]
-        API[MaaS API]
-    end
-
-    subgraph ModelLayer["Model Serving"]
-        INV[Inference Service]
-        LLM[LLM]
-    end
-
-    U --&gt;|"1. Inference + API key"| G
-    G --&gt;|"2. Route"| MAP
-    MAP -.-&gt;|"3. Validate key"| API
-    MAP --&gt;|"4. Auth OK"| MS
-    MS --&gt;|"5. Within limits"| INV
-    INV --&gt;|"6. Forward"| LLM
-    LLM --&gt;|"7. Completion"| U
-
-    MAP -.-&gt;|"401/403"| U
-    MS -.-&gt;|"429"| U
-
-    linkStyle 7 stroke:#c62828,stroke-width:2px,stroke-dasharray:5,5
-    linkStyle 8 stroke:#c62828,stroke-width:2px,stroke-dasharray:5,5
-
-    style API fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style G fill:#7b1fa2,stroke:#333,stroke-width:2px,color:#fff
-    style MAP fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style MS fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style INV fill:#388e3c,stroke:#333,stroke-width:2px,color:#fff
-    style LLM fill:#388e3c,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<h3 id="auth-validation-flow-deep-dive">Auth &amp; Validation Flow (Deep Dive)</h3>
-<p>The MaaSAuthPolicy delegates to the MaaS API for key validation and subscription selection. The subscription name comes from the PostgreSQL key record (set at key creation).</p>
-<p><strong>Flow summary:</strong></p>
+<p>This preserves compatibility with the current model-route policy while allowing non-OpenShift identities to onboard through <code>maas-api</code>.</p>
+<hr />
+<h2 id="authpolicy-and-subscription-interaction">AuthPolicy and Subscription Interaction</h2>
+<h3 id="maasauthpolicy">MaaSAuthPolicy</h3>
+<p>MaaSAuthPolicy resources grant <strong>permission</strong> to access models. Each policy:</p>
+<ul>
+<li>Lives in the <code>models-as-a-service</code> namespace</li>
+<li>References one or more MaaSModelRef resources (by name and namespace)</li>
+<li>Specifies which groups or users can access those models</li>
+<li>Generates Authorino AuthPolicy resources for enforcement at the gateway</li>
+</ul>
+<p><strong>Multiple policies per model</strong>: You can create multiple MaaSAuthPolicies that reference the same model. The controller aggregates them—a user matching any policy gets access.</p>
+<h3 id="maassubscription">MaaSSubscription</h3>
+<p>MaaSSubscription resources grant <strong>quota</strong> and define rate limits. Each subscription:</p>
+<ul>
+<li>Lives in the <code>models-as-a-service</code> namespace</li>
+<li>References one or more MaaSModelRef resources (by name and namespace)</li>
+<li>Specifies owner groups or users</li>
+<li>Defines per-model token rate limits (e.g., 100 tokens/min, 100000 tokens/24h)</li>
+<li>Has a priority for automatic selection</li>
+</ul>
+<p><strong>API key binding</strong>: When you create an API key, it binds to one subscription (explicit or highest priority). The bound subscription determines which models you can access and what rate limits apply.</p>
+<h3 id="access-decision-flow">Access Decision Flow</h3>
+<p>For a user to access a model:</p>
 <ol>
-<li>Authorino calls MaaS API to validate the API key.</li>
-<li>MaaS API validates the key (format, not revoked, not expired) and returns username, groups, and subscription.</li>
-<li>Authorino calls MaaS API to check subscription (groups, username, requested subscription from the key).</li>
-<li>If the user lacks access to the requested subscription → error (403).</li>
-<li>On success, returns selected subscription; Authorino caches the result (e.g., 60s TTL). AuthPolicy may inject <code>X-MaaS-Subscription</code> <strong>server-side</strong> for downstream rate limiting and metrics. Clients do not send this header on inference; subscription comes from the API key record created at mint time.</li>
+<li><strong>Authentication</strong>: User presents an API key or identity token</li>
+<li><strong>Authorization check</strong> (AuthPolicy):</li>
+<li>Does the user's groups match any MaaSAuthPolicy for this model?</li>
+<li>If no: 403 Forbidden</li>
+<li><strong>Quota check</strong> (Subscription):</li>
+<li>Does the user's API key have a subscription that includes this model?</li>
+<li>If no: 403 Forbidden</li>
+<li><strong>Rate limit check</strong> (TokenRateLimitPolicy):</li>
+<li>Has the user exceeded token limits for this subscription?</li>
+<li>If yes: 429 Too Many Requests</li>
+<li><strong>If all checks pass</strong>: Request forwarded to model backend</li>
 </ol>
-<pre class="mermaid"><code>graph TB
-    subgraph AuthLayer["MaaSAuthPolicy (Authorino)"]
-        A[Authorino]
-    end
-
-    subgraph MaaSLayer["MaaS API"]
-        Validate[Validate API Key]
-        SubSelect[Check Subscription]
-    end
-
-    subgraph Storage["Storage"]
-        DB[(PostgreSQL)]
-    end
-
-    A --&gt;|"1. Validate key"| Validate
-    Validate --&gt;|"Lookup hash, check not expired"| DB
-    DB --&gt;|"metadata"| Validate
-
-    A --&gt;|"2. Check subscription"| SubSelect
-    SubSelect -.-&gt;|"3. No access to requested sub → 403"| A
-    SubSelect --&gt;|"4. Selected subscription"| A
-
-    linkStyle 4 stroke:#c62828,stroke-width:2px,stroke-dasharray:5,5
-
-    style Validate fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style SubSelect fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style DB fill:#336791,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<h3 id="observability-flow">Observability Flow</h3>
-<p>Token usage and rate-limit data flow from Limitador into Prometheus and onward to dashboards.</p>
-<p><strong>Flow summary:</strong></p>
-<ol>
-<li>Limitador stores token usage counters (e.g., <code>authorized_hits</code>, <code>authorized_calls</code>, <code>limited_calls</code>) with labels (<code>user</code>, <code>model</code>).</li>
-<li>A ServiceMonitor (or Kuadrant PodMonitor) configures Prometheus to scrape Limitador's <code>/metrics</code> endpoint.</li>
-<li>Prometheus stores the metrics in its time-series database.</li>
-<li>Grafana (or other visualization tools) queries Prometheus to build dashboards for usage, billing, and operational health.</li>
-</ol>
-<pre class="mermaid"><code>graph LR
-    subgraph RateLimiting["Rate Limiting"]
-        Limitador[Limitador&lt;br/&gt;Token usage counters&lt;br/&gt;authorized_hits, authorized_calls, limited_calls]
-    end
-
-    subgraph Scraping["Metric Scraping"]
-        SM[ServiceMonitor&lt;br/&gt;or PodMonitor]
-    end
-
-    subgraph Storage["Metrics Storage"]
-        Prometheus[(Prometheus)]
-    end
-
-    subgraph Visualization["Visualization"]
-        Grafana[Grafana&lt;br/&gt;Dashboards]
-    end
-
-    Limitador --&gt;|"/metrics"| SM
-    SM --&gt;|"Scrape"| Prometheus
-    Prometheus --&gt;|"Query"| Grafana
-
-    style Limitador fill:#e65100,stroke:#333,stroke-width:2px,color:#fff
-    style Prometheus fill:#1976d2,stroke:#333,stroke-width:2px,color:#fff
-    style Grafana fill:#388e3c,stroke:#333,stroke-width:2px,color:#fff</code></pre>
-<h2 id="component-flows">🔄 Component Flows</h2>
-<h3 id="1-api-key-creation-flow-maas-api">1. API Key Creation Flow (MaaS API)</h3>
-<p>Users create API keys by authenticating with an accepted identity token (OpenShift today, or OIDC when configured on the <code>maas-api</code> route). The MaaS API generates a key, stores only the hash in PostgreSQL, and returns the plaintext once:</p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant User
-    participant Gateway as Gateway API
-    participant Authorino
-    participant MaaS as MaaS API
-    participant DB as PostgreSQL
-
-    User-&gt;&gt;Gateway: POST /maas-api/v1/api-keys&lt;br/&gt;Authorization: Bearer {identity-token}
-    Gateway-&gt;&gt;Authorino: Enforce MaaS API AuthPolicy
-    Authorino-&gt;&gt;Authorino: Validate token (TokenReview or OIDC JWT)
-    Authorino-&gt;&gt;Gateway: Authenticated
-    Gateway-&gt;&gt;MaaS: Forward request with user context
-
-    Note over MaaS,DB: Create API Key
-    MaaS-&gt;&gt;MaaS: Generate sk-oai-* key, hash with SHA-256
-    MaaS-&gt;&gt;MaaS: Resolve subscription (explicit or highest priority)
-    MaaS-&gt;&gt;DB: Store hash + metadata (user, groups, subscription, name)
-    DB--&gt;&gt;MaaS: Stored
-
-    MaaS--&gt;&gt;User: { "key": "sk-oai-...", "id": "...", ... }&lt;br/&gt;Plaintext shown ONLY ONCE</code></pre>
-<h3 id="2-model-inference-flow">2. Model Inference Flow</h3>
-<p>Inference requests use the API key. Authorino validates it via HTTP callback (with caching); Limitador enforces subscription-based token limits:</p>
-<pre class="mermaid"><code>sequenceDiagram
-    participant Client
-    participant GatewayAPI
-    participant Authorino
-    participant MaaS as MaaS API
-    participant Limitador
-    participant LLMInferenceService
-
-    Client-&gt;&gt;GatewayAPI: Inference + API Key
-    GatewayAPI-&gt;&gt;Authorino: Validate credentials
-
-    alt API key (sk-oai-*)
-        Authorino-&gt;&gt;MaaS: POST /internal/v1/api-keys/validate
-        MaaS-&gt;&gt;MaaS: Lookup hash in PostgreSQL
-        MaaS--&gt;&gt;Authorino: { valid, userId, groups, subscription }
-    end
-
-    Authorino-&gt;&gt;MaaS: POST /internal/v1/subscriptions/select (subscription check)
-    MaaS--&gt;&gt;Authorino: Selected subscription
-
-    Authorino-&gt;&gt;GatewayAPI: Auth success (cached)
-    GatewayAPI-&gt;&gt;Limitador: Check TokenRateLimitPolicy
-    Limitador--&gt;&gt;GatewayAPI: Within limits
-    GatewayAPI-&gt;&gt;LLMInferenceService: Forward request
-    LLMInferenceService--&gt;&gt;Client: Response</code></pre>
+<hr />
+<h2 id="related-documentation">Related Documentation</h2>
+<p><strong>User Guides:</strong></p>
+<ul>
+<li><a href="../../user-guide/model-discovery/">Model Discovery</a> - Listing available models</li>
+<li><a href="../../user-guide/inference/">Inference</a> - Making inference requests</li>
+<li><a href="../../user-guide/api-key-management/">API Key Management</a> - Creating and managing API keys</li>
+</ul>
+<p><strong>Concepts:</strong></p>
+<ul>
+<li><a href="../api-key-authentication/">API Key Authentication</a> - How API key creation and validation works</li>
+<li><a href="../subscription-overview/">Access and Quota Overview</a> - High-level overview of policies and subscriptions</li>
+</ul>
+<p><strong>Administration:</strong></p>
+<ul>
+<li><a href="../../configuration-and-management/quota-and-access-configuration/">Quota and Access Configuration</a> - Configuring MaaSAuthPolicy and MaaSSubscription</li>
+</ul>
 
 
 
@@ -2848,7 +2900,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 29, 2026 14:34:45 UTC">March 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 29, 2026 19:59:56 UTC">April 29, 2026</span>
   </span>
 
     
@@ -2858,7 +2910,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 8, 2025 19:39:28 UTC">October 8, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 29, 2026 19:59:56 UTC">April 29, 2026</span>
   </span>
 
     
@@ -2913,10 +2965,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "search.suggest", "search.boost", "navigation.instant"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "search.highlight", "search.share", "content.code.copy", "content.code.annotate", "search.suggest", "search.boost", "navigation.instant"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
     
   </body>

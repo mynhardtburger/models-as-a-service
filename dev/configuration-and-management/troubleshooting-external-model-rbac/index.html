@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://opendatahub-io.github.io/models-as-a-service/dev/configuration-and-management/maas-model-kinds/">
+        <link rel="canonical" href="https://opendatahub-io.github.io/models-as-a-service/dev/configuration-and-management/troubleshooting-external-model-rbac/">
       
       
-        <link rel="prev" href="../model-listing-flow/">
+        <link rel="prev" href="../namespace-rbac/">
       
       
-        <link rel="next" href="../maas-controller-overview/">
+        <link rel="next" href="../tls-configuration/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>MaaS Model Kinds - ODH Models-as-a-Service Documentation</title>
+        <title>Troubleshooting ExternalModel RBAC - ODH Models-as-a-Service Documentation</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#maasmodelref-kinds" class="md-skip">
+        <a href="#externalmodel-rbac-service-creation-failures" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MaaS Model Kinds
+              Troubleshooting ExternalModel RBAC
             
           </span>
         </div>
@@ -253,7 +253,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../architecture/" class="md-tabs__link">
+        <a href="../../concepts/architecture/" class="md-tabs__link">
           
   
   
@@ -327,11 +327,31 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../user-guide/self-service-model-access/" class="md-tabs__link">
+        <a href="../../user-guide/api-key-management/" class="md-tabs__link">
           
   
   
   User Guide
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../contributing/testing-guide/" class="md-tabs__link">
+          
+  
+  
+  Contributing
 
         </a>
       </li>
@@ -671,7 +691,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/" class="md-nav__link">
+      <a href="../../concepts/architecture/" class="md-nav__link">
         
   
   
@@ -699,7 +719,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../subscription-overview/" class="md-nav__link">
+      <a href="../../concepts/personas/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Personas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/subscription-overview/" class="md-nav__link">
         
   
   
@@ -727,14 +775,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../maas-models/" class="md-nav__link">
+      <a href="../../concepts/model-reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    MaaS Models
+    Model Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/api-key-authentication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Key Authentication
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../concepts/model-access-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Access Control
   
 
     
@@ -1051,7 +1155,35 @@
   <span class="md-ellipsis">
     
   
-    Model Setup (On Cluster)
+    Model Setup
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/external-model-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    External Model Setup (Tech Preview)
   
 
     
@@ -1197,8 +1329,10 @@
                 
   
   
+    
   
   
+  
     
     
     
@@ -1212,13 +1346,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_1" checked>
         
           
           <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="">
@@ -1239,7 +1371,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4_1">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1285,14 +1417,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../token-management/" class="md-nav__link">
+      <a href="../api-key-administration/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Token Management
+    API Key Administration
   
 
     
@@ -1301,6 +1433,181 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../namespace-rbac/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Namespace User Permissions (RBAC)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting ExternalModel RBAC
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshooting ExternalModel RBAC
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#symptoms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Symptoms
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cause
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolution" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resolution
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resolution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix-add-the-missing-rule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fix: Add the Missing Rule
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1341,14 +1648,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../subscription-known-issues/" class="md-nav__link">
+      <a href="../gateway-patterns/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Subscription Known Issues
+    Gateway Patterns
   
 
     
@@ -1374,8 +1681,6 @@
                 
   
   
-    
-  
   
   
     
@@ -1391,11 +1696,13 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
         
           
           <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="">
@@ -1416,7 +1723,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4_2">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1441,7 +1748,7 @@
   <span class="md-ellipsis">
     
   
-    Model Setup (On Cluster)
+    Model Setup
   
 
     
@@ -1478,175 +1785,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaaS Model Kinds
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MaaS Model Kinds
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#modelref-backend-reference" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ModelRef (backend reference)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#endpoint-override" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Endpoint override
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#supported-kinds" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Supported Kinds
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Supported Kinds">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#llminferenceservice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        LLMInferenceService
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#externalmodel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExternalModel
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#api-behavior" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        API Behavior
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#adding-a-new-kind-in-the-future" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Adding a new kind in the future
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1745,34 +1883,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../crd-annotations/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    CRD Annotations
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -1852,7 +1962,7 @@
   <span class="md-ellipsis">
     
   
-    Observability
+    Observability Dashboard
   
 
     
@@ -1901,14 +2011,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced-administration/subscription-cardinality/" class="md-nav__link">
+      <a href="../authorino-caching/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Subscription Cardinality
+    Authorino Caching
   
 
     
@@ -1998,14 +2108,70 @@
   
   
     <li class="md-nav__item">
-      <a href="../../user-guide/self-service-model-access/" class="md-nav__link">
+      <a href="../../user-guide/api-key-management/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Self Service Model Access
+    API Key Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/model-discovery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Discovery
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user-guide/inference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inference
   
 
     
@@ -2058,7 +2224,7 @@
   <span class="md-ellipsis">
     
   
-    API Reference
+    Contributing
   
 
     
@@ -2071,6 +2237,95 @@
         
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Contributing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/testing-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MaaS Testing and Contribution Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2158,10 +2413,10 @@
         
           
         
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_3" >
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_3" >
         
           
-          <label class="md-nav__link" for="__nav_6_3" id="__nav_6_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_7_3" id="__nav_7_3_label" tabindex="0">
             
   
   
@@ -2179,8 +2434,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_6_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2302,6 +2557,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/crds/tenant/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tenant
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2344,10 +2627,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#modelref-backend-reference" class="md-nav__link">
+  <a href="#symptoms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ModelRef (backend reference)
+        Symptoms
       
     </span>
   </a>
@@ -2355,10 +2638,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#endpoint-override" class="md-nav__link">
+  <a href="#cause" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Endpoint override
+        Cause
       
     </span>
   </a>
@@ -2366,33 +2649,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#supported-kinds" class="md-nav__link">
+  <a href="#resolution" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Supported Kinds
+        Resolution
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Supported Kinds">
+    <nav class="md-nav" aria-label="Resolution">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#llminferenceservice" class="md-nav__link">
+  <a href="#fix-add-the-missing-rule" class="md-nav__link">
     <span class="md-ellipsis">
       
-        LLMInferenceService
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#externalmodel" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExternalModel
+        Fix: Add the Missing Rule
       
     </span>
   </a>
@@ -2405,10 +2677,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#api-behavior" class="md-nav__link">
+  <a href="#verification" class="md-nav__link">
     <span class="md-ellipsis">
       
-        API Behavior
+        Verification
       
     </span>
   </a>
@@ -2416,21 +2688,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#adding-a-new-kind-in-the-future" class="md-nav__link">
+  <a href="#related" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Adding a new kind in the future
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary
+        Related
       
     </span>
   </a>
@@ -2457,109 +2718,54 @@
   
 
 
-<h1 id="maasmodelref-kinds">MaaSModelRef Kinds</h1>
-<p>The MaaS API lists models from <strong>MaaSModelRef</strong> CRs only. Each MaaSModelRef defines a <strong>backend reference</strong> (<code>spec.modelRef</code>) that identifies the type and location of the model endpoint—similar in spirit to how <a href="https://gateway-api.sigs.k8s.io/reference/spec/#backendref">Gateway API's BackendRef</a> defines how a Route forwards requests to a Kubernetes resource (group, kind, name, namespace).</p>
-<p>This document describes the current <strong>modelRef</strong> semantics and how new kinds can be supported in the future.</p>
-<h2 id="modelref-backend-reference">ModelRef (backend reference)</h2>
-<p>MaaSModelRef's <code>spec.modelRef</code> identifies the <strong>referent</strong> (the backend that serves the model):</p>
-<table>
-<thead>
-<tr>
-<th>Field</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>kind</strong></td>
-<td>The type of backend. Determines which controller reconciles this MaaSModelRef and how the endpoint is resolved. Valid values: <code>LLMInferenceService</code>, <code>ExternalModel</code>. The alias <code>llmisvc</code> is also accepted for backwards compatibility.</td>
-</tr>
-<tr>
-<td><strong>name</strong></td>
-<td>Name of the referent resource (e.g. LLMInferenceService name, or external model identifier).</td>
-</tr>
-</tbody>
-</table>
-<p>The controller that reconciles MaaSModelRef uses <strong>kind</strong> to decide how to resolve the backend and populate <code>status.endpoint</code> and <code>status.phase</code>. The referent must be in the same namespace as the MaaSModelRef.</p>
-<h2 id="endpoint-override">Endpoint override</h2>
-<p>MaaSModelRef supports an optional <code>spec.endpointOverride</code> field. When set, the controller uses this value for <code>status.endpoint</code> instead of the auto-discovered endpoint from the backend (LLMInferenceService status, Gateway, or HTTPRoute hostnames).</p>
-<p>This is useful when:
-- The controller picks the wrong gateway or hostname for the model endpoint.
-- Your environment requires a specific URL that differs from what the backend reports.
-- You need to point the model at a custom proxy or load balancer.</p>
-<p>Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">maas.opendatahub.io/v1alpha1</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MaaSModelRef</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nt">metadata</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-model</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">  </span><span class="nt">namespace</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">llm</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nt">spec</span><span class="p">:</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">modelRef</span><span class="p">:</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">LLMInferenceService</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my-model</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">endpointOverride</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://correct-hostname.example.com/my-model&quot;</span>
+<h1 id="externalmodel-rbac-service-creation-failures">ExternalModel RBAC: Service Creation Failures</h1>
+<h2 id="symptoms">Symptoms</h2>
+<p>ExternalModel-backed MaaSModelRef objects remain <code>Pending</code> with backend-not-ready status. The <code>external-model-reconciler</code> logs show:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>cannot set blockOwnerDeletion if an ownerReference refers to a resource you can&#39;t set finalizers on
 </code></pre></div>
-<p>The controller still validates the backend (HTTPRoute exists, LLMInferenceService is ready, etc.) — the override only affects the final endpoint URL written to <code>status.endpoint</code>. When the field is empty or omitted, the controller uses its normal discovery logic.</p>
-<h2 id="supported-kinds">Supported Kinds</h2>
-<h3 id="llminferenceservice">LLMInferenceService</h3>
-<p>The <code>LLMInferenceService</code> kind (also accepts the alias <code>llmisvc</code> for backwards compatibility) references models deployed on the cluster via the LLMInferenceService CRD. The controller:
-- Sets <code>status.endpoint</code> from the LLMInferenceService status
-- Sets <code>status.phase</code> from LLMInferenceService readiness</p>
-<h3 id="externalmodel">ExternalModel</h3>
-<p>The <code>ExternalModel</code> kind references external AI/ML providers (e.g., OpenAI, Anthropic, Azure OpenAI). When using this kind:
-1. Create an <a href="../../reference/crds/external-model/">ExternalModel</a> CR with provider, endpoint, and credential reference
-2. Create a MaaSModelRef that references the ExternalModel by name</p>
-<p>The controller:
-- Fetches the ExternalModel CR from the same namespace
-- Validates the user-supplied HTTPRoute references the correct gateway
-- Derives <code>status.endpoint</code> from HTTPRoute hostnames or gateway addresses
-- Sets <code>status.phase</code> based on HTTPRoute acceptance by the gateway</p>
-<h2 id="api-behavior">API Behavior</h2>
+<h2 id="cause">Cause</h2>
+<p>The controller sets a controller <code>ownerReference</code> on the Service it creates for each ExternalModel. The API server enforces that the controller ServiceAccount (<code>maas-controller</code>) must have <code>update</code> permission on the <code>externalmodels/finalizers</code> subresource (OwnerReferencesPermissionEnforcement admission controller).</p>
+<p>If this permission is missing, Service creation fails and routes never become healthy.</p>
+<h2 id="resolution">Resolution</h2>
+<p>The ClusterRole <code>maas-controller-role</code> must include a rule allowing <code>update</code> on <code>externalmodels/finalizers</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">apiGroups</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;maas.opendatahub.io&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nt">resources</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;externalmodels/finalizers&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nt">verbs</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;update&quot;</span><span class="p p-Indicator">]</span>
+</code></pre></div>
+<p>Source manifest: <code>deployment/base/maas-controller/rbac/clusterrole.yaml</code></p>
+<p>The ClusterRoleBinding <code>maas-controller-rolebinding</code> must bind this role to the <code>maas-controller</code> ServiceAccount in the controller namespace (typically <code>opendatahub</code>).</p>
+<h3 id="fix-add-the-missing-rule">Fix: Add the Missing Rule</h3>
+<p>If the ODH operator manages these resources (via the <code>modelsAsService</code> DSC component), upgrade or reconcile the component. Otherwise, patch the ClusterRole directly:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>oc<span class="w"> </span>patch<span class="w"> </span>clusterrole<span class="w"> </span>maas-controller-role<span class="w"> </span>--type<span class="o">=</span>json<span class="w"> </span>-p<span class="o">=</span><span class="s1">&#39;[</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s1">  {</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s1">    &quot;op&quot;: &quot;add&quot;,</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s1">    &quot;path&quot;: &quot;/rules/-&quot;,</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="s1">    &quot;value&quot;: {</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="s1">      &quot;apiGroups&quot;: [&quot;maas.opendatahub.io&quot;],</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="s1">      &quot;resources&quot;: [&quot;externalmodels/finalizers&quot;],</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="s1">      &quot;verbs&quot;: [&quot;update&quot;]</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="s1">    }</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="s1">  }</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="s1">]&#39;</span>
+</code></pre></div>
+<h2 id="verification">Verification</h2>
+<p>Verify the ServiceAccount has the required permission:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Replace NAMESPACE with the ExternalModel namespace (e.g., llm)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># Replace SA_NAMESPACE with the controller namespace (e.g., opendatahub)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>oc<span class="w"> </span>auth<span class="w"> </span>can-i<span class="w"> </span>update<span class="w"> </span>externalmodels<span class="w"> </span>--subresource<span class="o">=</span>finalizers<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">  </span>-n<span class="w"> </span>NAMESPACE<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">  </span>--as<span class="o">=</span>system:serviceaccount:SA_NAMESPACE:maas-controller
+</code></pre></div>
+<p>Expected output: <code>yes</code></p>
+<div class="admonition warning">
+<p class="admonition-title">Common Pitfall</p>
+<p>Do not use <code>oc auth can-i update externalmodels/finalizers</code> (slash notation). This form often returns <code>no</code> even when the permission exists. Always use <code>--subresource=finalizers</code> for accurate results.</p>
+</div>
+<h2 id="related">Related</h2>
 <ul>
-<li>The API reads MaaSModelRefs cluster-wide, maps each to an API model (<code>id</code>, <code>url</code>, <code>ready</code>, <code>kind</code>, etc.)</li>
-<li><strong>Access validation</strong>: Probes each model's <code>/v1/models</code> endpoint with the request's Authorization header. Only models that return 2xx or 405 are included.</li>
-<li><strong>Kind on the wire</strong>: Each model in the GET /v1/models response carries a <code>kind</code> field from <code>spec.modelRef.kind</code></li>
-</ul>
-<h2 id="adding-a-new-kind-in-the-future">Adding a new kind in the future</h2>
-<p>To support a new backend type (a new <strong>kind</strong> in <code>spec.modelRef</code>):</p>
-<ol>
-<li><strong>MaaSModelRef CRD and controller</strong></li>
-<li>Add a new allowed value for <code>spec.modelRef.kind</code> (e.g. <code>mybackend</code>).</li>
-<li>
-<p>In the <strong>maas-controller</strong>, extend the reconciler so that when <strong>kind</strong> is the new value it:</p>
-<ul>
-<li>Resolves the referent (e.g. custom resource or external URL) using <strong>name</strong> and optional <strong>namespace</strong>.</li>
-<li>Sets <code>status.endpoint</code> and <code>status.phase</code> (and any other status the API or UI need).</li>
-</ul>
-</li>
-<li>
-<p><strong>MaaS API</strong></p>
-</li>
-<li><strong>Listing:</strong> No change required. The API lists all MaaSModelRefs and uses <code>status.endpoint</code> and <code>status.phase</code>; it does not branch on <strong>kind</strong> for listing.</li>
-<li>
-<p><strong>Access validation:</strong> The API probes <code>status.endpoint</code> + <code>/v1/models</code> with the request's Authorization header. If a new kind uses a different path or protocol:</p>
-<ul>
-<li><strong>Option A (preferred):</strong> The backend exposes the same path the API expects (e.g. OpenAI-compatible <code>/v1/models</code>), so no API change.</li>
-<li><strong>Option B:</strong> Extend the API's access-validation logic to branch on <strong>kind</strong> and use a kind-specific probe (different URL path or client), while keeping the same contract: include a model only if the probe with the user's token succeeds.</li>
-</ul>
-</li>
-<li>
-<p><strong>Enrichment (optional)</strong></p>
-</li>
-<li>
-<p>The API reads standard annotations from MaaSModelRef (<code>openshift.io/display-name</code>, <code>openshift.io/description</code>, <code>opendatahub.io/genai-use-case</code>, <code>opendatahub.io/context-window</code>) and returns them in the <code>modelDetails</code> field of the GET /v1/models response. See <a href="../crd-annotations/">CRD annotations</a> for the full list. For a new kind, add a small branch in the MaaSModelRef → API model conversion if needed.</p>
-</li>
-<li>
-<p><strong>RBAC</strong></p>
-</li>
-<li>If the new kind’s reconciler or the API needs to read another resource, add the corresponding <strong>list/watch</strong> (and optionally <strong>get</strong>) permissions to the maas-api ClusterRole and/or the controller’s RBAC.</li>
-</ol>
-<h2 id="summary">Summary</h2>
-<ul>
-<li><strong>modelRef</strong> is the backend reference (kind, name, optional namespace), analogous to <a href="https://gateway-api.sigs.k8s.io/reference/spec/#backendref">Gateway API BackendRef</a>.</li>
-<li><strong>Listing:</strong> Always from MaaSModelRef resources cluster-wide; no kind-specific listing logic.</li>
-<li><strong>Access validation:</strong> Same probe (GET endpoint with the request's Authorization header as-is) for all kinds unless kind-specific probes are added later.</li>
-<li><strong>New kinds:</strong> Implement in the controller (resolve referent, set status.endpoint and status.phase); extend the API only if the new kind cannot use the same probe path or needs different enrichment.</li>
+<li><a href="../namespace-rbac/">Namespace user permissions (RBAC)</a></li>
+<li><a href="../maas-controller-overview/">MaaS controller overview</a></li>
 </ul>
 
 
@@ -2583,7 +2789,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 26, 2026 16:21:53 UTC">March 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 6, 2026 13:40:07 UTC">May 6, 2026</span>
   </span>
 
     
@@ -2593,7 +2799,7 @@
     <span class="md-icon" title="Created">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14.47 15.08 11 13V7h1.5v5.25l3.08 1.83c-.41.28-.79.62-1.11 1m-1.39 4.84c-.36.05-.71.08-1.08.08-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8c0 .37-.03.72-.08 1.08.69.1 1.33.32 1.92.64.1-.56.16-1.13.16-1.72 0-5.5-4.5-10-10-10S2 6.5 2 12s4.47 10 10 10c.59 0 1.16-.06 1.72-.16-.32-.59-.54-1.23-.64-1.92M18 15v3h-3v2h3v3h2v-3h3v-2h-3v-3z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 27, 2026 17:58:09 UTC">February 27, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 17, 2026 02:14:44 UTC">April 17, 2026</span>
   </span>
 
     
